@@ -188,7 +188,7 @@ function buildSubjectCards() {
     });
 }
 
-// --- SCREEN 2: BRANCHES DISPLAY WITH BANNER ---
+// --- 🌿 BRANCH/CHAPTERS GRID GENERATOR (Screen 2) ---
 function goToBranchSelect(subjectKey) {
     currentSubject = subjectKey;
     
@@ -208,6 +208,7 @@ function goToBranchSelect(subjectKey) {
         let mProg = getBranchProgress(subjectKey, branchKey, 'Mock Test');
         let branchProgress = Math.round((qProg + mProg) / 2) || 0;
 
+        // Count completed branches (100% progress)
         if (branchProgress >= 100) {
             completedChapters++;
         }
@@ -228,26 +229,24 @@ function goToBranchSelect(subjectKey) {
         container.appendChild(card);
     });
 
+    // Dynamic Overall Progress Calculation
     let subjectOverallProgress = getSubjectProgress(subjectKey);
 
-    // Update Stats Elements in Banner
+    // Banner Stats Update
     const totalElem = document.getElementById('stat-total-chapters');
     const compElem = document.getElementById('stat-completed-chapters');
     const progElem = document.getElementById('stat-progress-perc');
-    const barFillElem = document.getElementById('branch-header-bar-fill');
-    const footerTextElem = document.getElementById('branch-completed-text');
 
     if (totalElem) totalElem.innerText = totalChapters;
     if (compElem) compElem.innerText = completedChapters;
     if (progElem) progElem.innerText = `${subjectOverallProgress}%`;
-    if (barFillElem) barFillElem.style.width = `${subjectOverallProgress}%`;
-    if (footerTextElem) footerTextElem.innerText = `${completedChapters} / ${totalChapters} ચેપ્ટર પૂર્ણ`;
 
     if (!isRestoring) {
       sessionStorage.setItem('last_active_subject', currentSubject);
     }
     changeScreen('screen-branches');
 }
+
 
 // --- SCREEN 3: TYPE SELECT ---
 function goToTypeSelect(branchKey) {
