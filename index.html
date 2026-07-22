@@ -44,52 +44,48 @@
         <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
         
         <!-- NEW PREMIUM BANNER HEADER -->
-        <div class="branch-header-card">
-            <div class="header-main-info">
-                <div class="header-icon-box">📖</div>
-                <div class="header-text-box">
-                    <h1 id="current-subject-title-branch">વિષયનું નામ</h1>
-                    <p>તમારો ચેપ્ટર પસંદ કરો</p>
-                </div>
-            </div>
+        <!-- UPDATED CLEAN BRANCH BANNER HEADER -->
+<div class="branch-header-card">
+    <div class="header-main-info">
+        <div class="header-icon-box">📖</div>
+        <div class="header-text-box">
+            <h1 id="current-subject-title-branch">વિષયનું નામ</h1>
+            <p>તમારો ચેપ્ટર પસંદ કરો</p>
+        </div>
+    </div>
 
-            <div class="header-stats-row">
-                <div class="stat-item">
-                    <span class="stat-icon blue-bg">📄</span>
-                    <div class="stat-details">
-                        <span class="stat-label">કુલ ચેપ્ટર</span>
-                        <span class="stat-value" id="stat-total-chapters">0</span>
-                    </div>
-                </div>
-                
-                <div class="stat-divider"></div>
-                
-                <div class="stat-item">
-                    <span class="stat-icon green-bg">✓</span>
-                    <div class="stat-details">
-                        <span class="stat-label">પૂર્ણ થયેલ</span>
-                        <span class="stat-value" id="stat-completed-chapters">0</span>
-                    </div>
-                </div>
-                
-                <div class="stat-divider"></div>
-                
-                <div class="stat-item">
-                    <span class="stat-icon orange-bg">↗</span>
-                    <div class="stat-details">
-                        <span class="stat-label">તમારી પ્રગતિ</span>
-                        <span class="stat-value" id="stat-progress-perc">0%</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="header-progress-section">
-                <div class="progress-bar-track">
-                    <div class="progress-bar-fill" id="branch-header-bar-fill" style="width: 0%;"></div>
-                </div>
-                <div class="progress-footer-text" id="branch-completed-text">0 / 0 ચેપ્ટર પૂર્ણ</div>
+    <div class="header-stats-row">
+        <div class="stat-item">
+            <span class="stat-icon blue-bg">📄</span>
+            <div class="stat-details">
+                <span class="stat-label">કુલ ચેપ્ટર</span>
+                <span class="stat-value" id="stat-total-chapters">0</span>
             </div>
         </div>
+        
+        <div class="stat-divider"></div>
+        
+        <div class="stat-item">
+            <span class="stat-icon green-bg">✓</span>
+            <div class="stat-details">
+                <span class="stat-label">પૂર્ણ થયેલ</span>
+                <span class="stat-value" id="stat-completed-chapters">0</span>
+            </div>
+        </div>
+        
+        <div class="stat-divider"></div>
+        
+        <div class="stat-item">
+            <span class="stat-icon orange-bg">↗</span>
+            <div class="stat-details">
+                <span class="stat-label">તમારી પ્રગતિ</span>
+                <span class="stat-value" id="stat-progress-perc">0%</span>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom Progress Section removed for a cleaner look -->
+</div>
+
 
         <div class="grid" id="branches-container"></div>
     </div>
