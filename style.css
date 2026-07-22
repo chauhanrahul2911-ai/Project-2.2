@@ -391,16 +391,17 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 /* Mobile Responsiveness */
 @media (max-width: 480px) {
     .subject-header-card {
-        padding: 1.4rem 1.2rem;
+        padding: 1.2rem 1rem;
     }
     .subject-header-left h1 {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
     .subject-header-left p {
-        font-size: 0.82rem;
+        font-size: 0.8rem;
     }
     .subject-header-img {
-        width: 90px;
-        max-height: 90px;
+        width: 120px;
+        max-height: 110px;
+        transform: scale(1.1); /* 👈 Zoom effect for sharp look */
     }
 }
