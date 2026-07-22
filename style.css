@@ -380,12 +380,12 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 
 /* Image Size Fix - Increase width & height */
 .subject-header-img {
-    width: 150px;           /* 👈 110px se badha kar 150px kiya */
+    width: 180px;           /* 👈 110px se badha kar 150px kiya */
     height: auto;
-    max-height: 140px;      /* 👈 Height limit badhayi */
+    max-height: 170px;      /* 👈 Height limit badhayi */
     object-fit: contain;
     filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4));
-    transform: scale(1.1);  /* 👈 Slight zoom effect for better visual presence */
+    transform: scale(1.25);  /* 👈 Slight zoom effect for better visual presence */
 }
 
 /* Mobile Responsiveness */
@@ -400,8 +400,8 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
         font-size: 0.8rem;
     }
     .subject-header-img {
-        width: 120px;
-        max-height: 110px;
-        transform: scale(1.1); /* 👈 Zoom effect for sharp look */
+        width: 140px;
+        max-height: 130px;
+        transform: scale(1.2); /* 👈 Zoom effect for sharp look */
     }
 }
