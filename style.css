@@ -321,3 +321,83 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .modal-content h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; }
 .modal-content p { color: var(--ink-soft); font-size: 0.92rem; margin-top: 10px; line-height: 1.5; }
 .modal-content h2 { font-family: var(--font-display); font-size: 2.1rem; }
+
+/* --- SUBJECTS BANNER HEADER CARD --- */
+.subject-header-card {
+    background: linear-gradient(135deg, #071e3d 0%, #0f2340 50%, #16325c 100%);
+    border-radius: 20px;
+    padding: 1.8rem 1.5rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 25px rgba(7, 30, 61, 0.25);
+    margin-bottom: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid #f97316; /* Orange bottom border accent */
+}
+
+.subject-header-left {
+    flex: 1;
+    z-index: 2;
+    padding-right: 10px;
+}
+
+.subject-header-left h1 {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Gold Underline Divider */
+.subject-title-line {
+    width: 45px;
+    height: 4px;
+    background-color: var(--gold-light, #d9a757);
+    border-radius: 4px;
+    margin: 10px 0 12px 0;
+}
+
+.subject-header-left p {
+    font-size: 0.9rem;
+    color: #cbd5e0;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.subject-header-right {
+    flex-shrink: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subject-header-img {
+    width: 110px;
+    height: auto;
+    max-height: 110px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .subject-header-card {
+        padding: 1.4rem 1.2rem;
+    }
+    .subject-header-left h1 {
+        font-size: 1.3rem;
+    }
+    .subject-header-left p {
+        font-size: 0.82rem;
+    }
+    .subject-header-img {
+        width: 90px;
+        max-height: 90px;
+    }
+}
