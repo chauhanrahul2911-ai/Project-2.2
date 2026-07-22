@@ -202,22 +202,31 @@ function buildSubjectCards() {
     });
 }
 
-// --- 🌿 BRANCH/CHAPTERS GRID GENERATOR (Screen 2) ---
 function goToBranchSelect(subjectKey) {
     currentSubject = subjectKey;
     
+    // 1. Subject ka naam update karo
     let cleanSubjectName = subjectData[subjectKey].gujName;
     document.getElementById('current-subject-title-branch').innerText = cleanSubjectName;
     
+    const branches = Object.keys(subjectData[subjectKey].branches);
+    
+    // LOGIC 1: Kul Chapter
+    const totalChapters = branches.length; 
+    let completedChapters = 0;
+
     const container = document.getElementById('branches-container');
     container.innerHTML = "";
 
-    const branches = Object.keys(subjectData[subjectKey].branches);
-    
     branches.forEach((branchKey, index) => {
         let qProg = getBranchProgress(subjectKey, branchKey, 'Quiz');
         let mProg = getBranchProgress(subjectKey, branchKey, 'Mock Test');
         let branchProgress = Math.round((qProg + mProg) / 2) || 0;
+
+        // LOGIC 2: Purn Thayel - Agar kisi branch ki progress 100% ho gayi hai to count badhao
+        if (branchProgress >= 100) {
+            completedChapters++;
+        }
 
         let cleanBranchName = subjectData[subjectKey].branches[branchKey].gujName;
 
@@ -234,6 +243,19 @@ function goToBranchSelect(subjectKey) {
         `;
         container.appendChild(card);
     });
+
+    // LOGIC 3: Pragati - Same wahi jo Screen 1 (Subjects) me compute hoti hai
+    let subjectOverallProgress = getSubjectProgress(subjectKey);
+
+    // Dynamic Elements me Values Set Karna
+    document.getElementById('stat-total-chapters').innerText = totalChapters;
+    document.getElementById('stat-completed-chapters').innerText = completedChapters;
+    document.getElementById('stat-progress-perc').innerText = `${subjectOverallProgress}%`;
+
+    // Banner ka Progress Bar aur Footer Text Update
+    document.getElementById('branch-header-bar-fill').style.width = `${subjectOverallProgress}%`;
+    document.getElementById('branch-completed-text').innerText = `${completedChapters} / ${totalChapters} ચેપ્ટર પૂર્ણ`;
+
     if (!isRestoring) {
       sessionStorage.setItem('last_active_subject', currentSubject);
     }
