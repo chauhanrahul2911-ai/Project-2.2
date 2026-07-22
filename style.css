@@ -400,8 +400,8 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
         font-size: 0.8rem;
     }
     .subject-header-img {
-        width: 140px;
-        max-height: 130px;
-        transform: scale(1.2); /* 👈 Zoom effect for sharp look */
+        width: 180px;
+        max-height: 170px;
+        transform: scale(1.25); /* 👈 Zoom effect for sharp look */
     }
 }
