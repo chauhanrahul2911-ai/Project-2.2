@@ -326,7 +326,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .subject-header-card {
     background: linear-gradient(135deg, #071e3d 0%, #0f2340 50%, #16325c 100%);
     border-radius: 20px;
-    padding: 1.8rem 1.5rem;
+    padding: 1.5rem 1.8rem; /* Padding thoda tight kiya */
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -335,7 +335,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     margin-bottom: 1.8rem;
     position: relative;
     overflow: hidden;
-    border-bottom: 4px solid #f97316; /* Orange bottom border accent */
+    border-bottom: 4px solid #f97316;
 }
 
 .subject-header-left {
@@ -369,20 +369,23 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     margin: 0;
 }
 
+/* Image container ko bada kiya */
 .subject-header-right {
     flex-shrink: 0;
     z-index: 2;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
+/* Image Size Fix - Increase width & height */
 .subject-header-img {
-    width: 110px;
+    width: 150px;           /* 👈 110px se badha kar 150px kiya */
     height: auto;
-    max-height: 110px;
+    max-height: 140px;      /* 👈 Height limit badhayi */
     object-fit: contain;
-    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4));
+    transform: scale(1.1);  /* 👈 Slight zoom effect for better visual presence */
 }
 
 /* Mobile Responsiveness */
