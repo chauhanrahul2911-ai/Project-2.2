@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Hind+Vadodara:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -21,8 +21,7 @@
         <button class="sidebar-close" onclick="toggleSidebar()">×</button>
         <div class="sidebar-brand">શ્રી સરસ્વતી કરિયર એકેડમી</div>
         
-        <div id="profile-area" class="profile-section">
-            </div>
+        <div id="profile-area" class="profile-section"></div>
 
         <ul class="sidebar-menu">
             <li class="sidebar-item active-menu" onclick="changeScreenFromSidebar('screen-subjects')">🏠 Home Dashboard</li>
@@ -31,66 +30,71 @@
         </ul>
     </div>
 
+    <!-- SCREEN 1: SUBJECTS -->
     <div id="screen-subjects" class="screen active">
         <header>
             <h1>વિષય વાઇઝ ટેસ્ટ સિરીઝ</h1>
             <p>તમારી પ્રગતિ અને વિષય પસંદ કરો</p>
         </header>
-        <div class="grid" id="subjects-container">
-            </div>
+        <div class="grid" id="subjects-container"></div>
     </div>
     
+    <!-- SCREEN 2: BRANCHES (CHAPTERS) -->
     <div id="screen-branches" class="screen">
-    <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
-    
-    <!-- NEW PREMIUM HEADER BANNER -->
-    <div class="branch-header-card">
-        <div class="header-main-info">
-            <div class="header-icon-box">📖</div>
-            <div class="header-text-box">
-                <h1 id="current-subject-title-branch">સામાન્ય જ્ઞાન</h1>
-                <p>તમારો ચેપ્ટર પસંદ કરો</p>
+        <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
+        
+        <!-- NEW PREMIUM BANNER HEADER -->
+        <div class="branch-header-card">
+            <div class="header-main-info">
+                <div class="header-icon-box">📖</div>
+                <div class="header-text-box">
+                    <h1 id="current-subject-title-branch">વિષયનું નામ</h1>
+                    <p>તમારો ચેપ્ટર પસંદ કરો</p>
+                </div>
+            </div>
+
+            <div class="header-stats-row">
+                <div class="stat-item">
+                    <span class="stat-icon blue-bg">📄</span>
+                    <div class="stat-details">
+                        <span class="stat-label">કુલ ચેપ્ટર</span>
+                        <span class="stat-value" id="stat-total-chapters">0</span>
+                    </div>
+                </div>
+                
+                <div class="stat-divider"></div>
+                
+                <div class="stat-item">
+                    <span class="stat-icon green-bg">✓</span>
+                    <div class="stat-details">
+                        <span class="stat-label">પૂર્ણ થયેલ</span>
+                        <span class="stat-value" id="stat-completed-chapters">0</span>
+                    </div>
+                </div>
+                
+                <div class="stat-divider"></div>
+                
+                <div class="stat-item">
+                    <span class="stat-icon orange-bg">↗</span>
+                    <div class="stat-details">
+                        <span class="stat-label">તમારી પ્રગતિ</span>
+                        <span class="stat-value" id="stat-progress-perc">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-progress-section">
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="branch-header-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="progress-footer-text" id="branch-completed-text">0 / 0 ચેપ્ટર પૂર્ણ</div>
             </div>
         </div>
 
-        <div class="header-stats-row">
-            <div class="stat-item">
-                <span class="stat-icon blue-bg">📄</span>
-                <div class="stat-details">
-                    <span class="stat-label">કુલ ચેપ્ટર</span>
-                    <span class="stat-value" id="stat-total-chapters">0</span>
-                </div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <span class="stat-icon green-bg">✓</span>
-                <div class="stat-details">
-                    <span class="stat-label">પૂર્ણ થયેલ</span>
-                    <span class="stat-value" id="stat-completed-chapters">0</span>
-                </div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <span class="stat-icon orange-bg">↗</span>
-                <div class="stat-details">
-                    <span class="stat-label">તમારી પ્રગતિ</span>
-                    <span class="stat-value" id="stat-progress-perc">0%</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="header-progress-section">
-            <div class="progress-bar-track">
-                <div class="progress-bar-fill" id="branch-header-bar-fill" style="width: 0%;"></div>
-            </div>
-            <div class="progress-footer-text" id="branch-completed-text">0 / 0 ચેપ્ટર પૂર્ણ</div>
-        </div>
+        <div class="grid" id="branches-container"></div>
     </div>
-
-    <div class="grid" id="branches-container"></div>
-  </div>
-
     
+    <!-- SCREEN 3: TYPE SELECT -->
     <div id="screen-type-select" class="screen">
         <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
         <header>
@@ -109,6 +113,7 @@
         </div>
     </div>
 
+    <!-- SCREEN 4: QUIZ LIST -->
     <div id="screen-quiz-list" class="screen">
         <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
         <header>
@@ -118,6 +123,7 @@
         <div id="dynamic-list-container" style="margin-top: 2rem;"></div>
     </div>
 
+    <!-- PAYWALL MODAL -->
     <div id="paywall-modal" class="modal">
         <div class="modal-content">
             <h3>🔒 પ્રીમિયમ પ્લાન</h3>
@@ -128,6 +134,6 @@
         </div>
     </div>
 
-<script src="main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
