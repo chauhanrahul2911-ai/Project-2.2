@@ -326,7 +326,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .subject-header-card {
     background: linear-gradient(135deg, #071e3d 0%, #0f2340 50%, #16325c 100%);
     border-radius: 20px;
-    padding: 1.5rem 1.8rem; /* Padding thoda tight kiya */
+    padding: 1.8rem 1.5rem;
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -334,14 +334,15 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     box-shadow: 0 10px 25px rgba(7, 30, 61, 0.25);
     margin-bottom: 1.8rem;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Modern card look */
     border-bottom: 4px solid #f97316;
+    min-height: 180px; /* Card ki height thodi badhayi */
 }
 
 .subject-header-left {
-    flex: 1;
+    flex: 1.2;
     z-index: 2;
-    padding-right: 10px;
+    padding-right: 15px;
 }
 
 .subject-header-left h1 {
@@ -353,7 +354,6 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     margin: 0;
 }
 
-/* Gold Underline Divider */
 .subject-title-line {
     width: 45px;
     height: 4px;
@@ -363,45 +363,49 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 }
 
 .subject-header-left p {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: #cbd5e0;
     line-height: 1.5;
     margin: 0;
 }
 
-/* Image container ko bada kiya */
+/* IMAGE CONTAINER & FULL SIZE IMAGE */
 .subject-header-right {
-    flex-shrink: 0;
+    flex: 1;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    position: relative;
 }
 
-/* Image Size Fix - Increase width & height */
 .subject-header-img {
-    width: 180px;           /* 👈 110px se badha kar 150px kiya */
+    width: 240px;           /* 👈 Direct 240px BADA SIZE */
     height: auto;
-    max-height: 170px;      /* 👈 Height limit badhayi */
+    max-height: 210px;      /* 👈 Height limit kafi badha di */
     object-fit: contain;
-    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4));
-    transform: scale(1.25);  /* 👈 Slight zoom effect for better visual presence */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    margin-right: -15px;    /* Right side me set karne ke liye */
+    margin-bottom: -10px;   /* Bottom alignment */
+    transform: scale(1.15); /* Sleek 3D pop effect */
 }
 
-/* Mobile Responsiveness */
+/* MOBILE RESPONSIVENESS */
 @media (max-width: 480px) {
     .subject-header-card {
-        padding: 1.2rem 1rem;
+        padding: 1.3rem 1rem;
+        min-height: 160px;
     }
     .subject-header-left h1 {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
     .subject-header-left p {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
     }
     .subject-header-img {
-        width: 180px;
-        max-height: 170px;
-        transform: scale(1.25); /* 👈 Zoom effect for sharp look */
+        width: 170px;         /* 👈 Mobile par bhi solid 170px */
+        max-height: 160px;
+        margin-right: -10px;
+        transform: scale(1.1);
     }
 }
