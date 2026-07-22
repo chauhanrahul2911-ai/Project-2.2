@@ -1,4 +1,4 @@
-// 📁 1. MASTER DATA STRUCTURE (PRO MODEL)
+// MASTER DATA STRUCTURE
 const subjectData = {
   samanya_gyan: {
     gujName: "સામાન્ય જ્ઞાન",
@@ -53,37 +53,28 @@ const subjectData = {
   }
 };
 
-// Automatic subjects array (English Keys) nikalne ke liye
 const syllabusSubjects = Object.keys(subjectData);
 
-let currentSubject = ""; // Stores English Key (e.g., "samanya_gyan")
-let currentBranch = "";  // Stores English Key (e.g., "gujarat_history")
+let currentSubject = ""; 
+let currentBranch = "";  
 let currentType = "";
 let isPremiumUser = (localStorage.getItem('gsrtc_is_premium') === 'true');
 let isRestoring = false;
 
-// --- SIDEBAR TOGGLE FUNCTIONS ---
+// --- SIDEBAR TOGGLE ---
 function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('open');
     document.getElementById('sidebar-overlay').classList.toggle('show');
 }
 
 function changeScreenFromSidebar() {
-
-    const screens = [
-        "screen-subjects",
-        "screen-branches",
-        "screen-type-select",
-        "screen-quiz-list"
-    ];
-
-    const currentScreen = history.state.activeScreen;
+    const screens = ["screen-subjects", "screen-branches", "screen-type-select", "screen-quiz-list"];
+    const currentScreen = history.state ? history.state.activeScreen : "screen-subjects";
     const steps = screens.indexOf(currentScreen);
 
     if (steps > 0) {
         history.go(-steps);
     }
-
     toggleSidebar();
 }
 
@@ -105,11 +96,10 @@ function changeScreen(screenId) {
     }
 }
 
-// --- 🧮 NEW DYNAMIC PROGRESS TRACKING ---
+// --- DYNAMIC PROGRESS TRACKING ---
 function getBranchProgress(subjectKey, branchKey, typeName) {
     let totalSum = 0;
     const totalTests = subjectData[subjectKey].branches[branchKey].totalTests;
-    // Local storage mapping sync ke liye Gujarati naam uthao
     const branchGujName = subjectData[subjectKey].branches[branchKey].gujName;
     
     for(let i = 1; i <= totalTests; i++) {
@@ -140,14 +130,13 @@ function getOverallAppProgress() {
     return Math.round(totalSum / syllabusSubjects.length) || 0;
 }
 
-// Chota helper: kisi bhi user-supplied text ko innerHTML mein safe daalne ke liye
 function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
 }
 
-// --- 👤 DYNAMIC SIDEBAR PROFILE RENDER ---
+// --- SIDEBAR PROFILE RENDER ---
 function updateProfileUI() {
     const profileArea = document.getElementById('profile-area');
     const userName = localStorage.getItem('gsrtc_logged_user');
@@ -155,9 +144,6 @@ function updateProfileUI() {
 
     if (userName) {
         let firstLetter = escapeHtml(userName.charAt(0));
-        // Naam ko escape karke hi innerHTML mein daalte hain, taki future mein
-        // real login se koi bhi naam aaye (jisme <,>,&, quotes ho saken),
-        // wo HTML/script ki tarah render na ho (XSS safe).
         const safeName = escapeHtml(userName);
         profileArea.innerHTML = `
             <div class="profile-left">
@@ -179,14 +165,14 @@ function updateProfileUI() {
     }
 }
 
-// --- 🚀 SUBJECTS GRID DISPLAY GENERATOR (Screen 1) ---
+// --- SCREEN 1: SUBJECTS DISPLAY ---
 function buildSubjectCards() {
     const container = document.getElementById('subjects-container');
     container.innerHTML = "";
 
     syllabusSubjects.forEach((subKey, index) => {
         let progress = getSubjectProgress(subKey);
-        let gujSubjectName = subjectData[subKey].gujName; // Gujarati Text Display
+        let gujSubjectName = subjectData[subKey].gujName;
 
         const card = document.createElement('div');
         card.className = "card";
@@ -202,16 +188,15 @@ function buildSubjectCards() {
     });
 }
 
+// --- SCREEN 2: BRANCHES DISPLAY WITH BANNER ---
 function goToBranchSelect(subjectKey) {
     currentSubject = subjectKey;
     
-    // 1. Subject ka naam update karo
     let cleanSubjectName = subjectData[subjectKey].gujName;
-    document.getElementById('current-subject-title-branch').innerText = cleanSubjectName;
+    const titleElem = document.getElementById('current-subject-title-branch');
+    if (titleElem) titleElem.innerText = cleanSubjectName;
     
     const branches = Object.keys(subjectData[subjectKey].branches);
-    
-    // LOGIC 1: Kul Chapter
     const totalChapters = branches.length; 
     let completedChapters = 0;
 
@@ -223,7 +208,6 @@ function goToBranchSelect(subjectKey) {
         let mProg = getBranchProgress(subjectKey, branchKey, 'Mock Test');
         let branchProgress = Math.round((qProg + mProg) / 2) || 0;
 
-        // LOGIC 2: Purn Thayel - Agar kisi branch ki progress 100% ho gayi hai to count badhao
         if (branchProgress >= 100) {
             completedChapters++;
         }
@@ -244,17 +228,20 @@ function goToBranchSelect(subjectKey) {
         container.appendChild(card);
     });
 
-    // LOGIC 3: Pragati - Same wahi jo Screen 1 (Subjects) me compute hoti hai
     let subjectOverallProgress = getSubjectProgress(subjectKey);
 
-    // Dynamic Elements me Values Set Karna
-    document.getElementById('stat-total-chapters').innerText = totalChapters;
-    document.getElementById('stat-completed-chapters').innerText = completedChapters;
-    document.getElementById('stat-progress-perc').innerText = `${subjectOverallProgress}%`;
+    // Update Stats Elements in Banner
+    const totalElem = document.getElementById('stat-total-chapters');
+    const compElem = document.getElementById('stat-completed-chapters');
+    const progElem = document.getElementById('stat-progress-perc');
+    const barFillElem = document.getElementById('branch-header-bar-fill');
+    const footerTextElem = document.getElementById('branch-completed-text');
 
-    // Banner ka Progress Bar aur Footer Text Update
-    document.getElementById('branch-header-bar-fill').style.width = `${subjectOverallProgress}%`;
-    document.getElementById('branch-completed-text').innerText = `${completedChapters} / ${totalChapters} ચેપ્ટર પૂર્ણ`;
+    if (totalElem) totalElem.innerText = totalChapters;
+    if (compElem) compElem.innerText = completedChapters;
+    if (progElem) progElem.innerText = `${subjectOverallProgress}%`;
+    if (barFillElem) barFillElem.style.width = `${subjectOverallProgress}%`;
+    if (footerTextElem) footerTextElem.innerText = `${completedChapters} / ${totalChapters} ચેપ્ટર પૂર્ણ`;
 
     if (!isRestoring) {
       sessionStorage.setItem('last_active_subject', currentSubject);
@@ -262,7 +249,7 @@ function goToBranchSelect(subjectKey) {
     changeScreen('screen-branches');
 }
 
-// --- ⚡ TYPE SELECT INTERMEDIARY (Screen 3) ---
+// --- SCREEN 3: TYPE SELECT ---
 function goToTypeSelect(branchKey) {
     currentBranch = branchKey;
     
@@ -274,13 +261,14 @@ function goToTypeSelect(branchKey) {
     
     document.getElementById('quiz-type-perc').innerText = `Progress: ${quizProg}%`;
     document.getElementById('mock-type-perc').innerText = `Progress: ${mockProg}%`;
+    
     if (!isRestoring) {
       sessionStorage.setItem('last_active_branch', currentBranch);
     }
     changeScreen('screen-type-select');
 }
 
-// --- 📋 DYNAMIC QUIZ ROWS GENERATOR (Screen 4) ---
+// --- SCREEN 4: QUIZ LIST ROWS ---
 function goToQuizList(type) {
     currentType = type;
     
@@ -325,7 +313,6 @@ function buildQuizRows() {
                     loginWithGoogle();
                 } else { openPaywall(); }
             } else {
-                
                 localStorage.setItem('last_active_subject', currentSubject);
                 localStorage.setItem('last_active_branch', currentBranch);
                 localStorage.setItem('last_active_type', currentType);
@@ -360,86 +347,55 @@ function simulatePayment() {
     alert("પેમેન્ટ સફળ રહ્યું! બધા લોક ખુલી ગયા છે.");
 }
 
-// --- ⚙️ ENTRY STARTUP INITS (RE-ENGINEERED FOR SESSIONSTORAGE & AUTO-REFRESH) ---
-
+// --- DASHBOARD INIT & HISTORY ---
 function initDashboard() {
     updateProfileUI();
     buildSubjectCards();
 
     const state = history.state;
-
-    if (state.activeScreen === "screen-subjects") {
-        return;
-    }
+    if (!state || state.activeScreen === "screen-subjects") return;
 
     isRestoring = true;
 
     if (state.activeScreen === "screen-branches") {
-
         goToBranchSelect(state.subject);
-
     }
     else if (state.activeScreen === "screen-type-select") {
-
         goToBranchSelect(state.subject);
         goToTypeSelect(state.branch);
-
     }
     else if (state.activeScreen === "screen-quiz-list") {
-
         goToBranchSelect(state.subject);
         goToTypeSelect(state.branch);
         goToQuizList(state.type);
-
     }
 
     isRestoring = false;
 }
 
-// 📱 HARDWARE BACK BUTTON TRIGERRING ENGINE (LAST MEIN LAGAYEIN)
 window.onpopstate = function () {
-    // Browser history se current screen nikalo
     const lastScreen = history.state?.activeScreen;
-
-    // 🎯 SAFETY GUARD: Agar state null hai (exit time), toh yahi se ruk jao
     if (!lastScreen) return;
   
-    // Sab screens hide karo
     document.querySelectorAll(".screen").forEach(screen => {
         screen.classList.remove("active");
     });
 
-    // Browser history wali screen dikhao
     document.getElementById(lastScreen).classList.add("active");
-
     window.scrollTo(0, 0);
 };
+
 function isBackForwardNavigation(event) {
-
-    // Modern browsers
     const nav = performance.getEntriesByType?.("navigation")?.[0];
-    if (nav && nav.type === "back_forward") {
-        return true;
-    }
-
-    // BFCache
-    if (event.persisted) {
-        return true;
-    }
-
-    // Older browsers (fallback)
-    if (window.performance &&
-        window.performance.navigation &&
-        window.performance.navigation.type === 2) {
-        return true;
-    }
-
+    if (nav && nav.type === "back_forward") return true;
+    if (event.persisted) return true;
+    if (window.performance && window.performance.navigation && window.performance.navigation.type === 2) return true;
     return false;
 }
-// 🌐 Case 1: Jab page bilkul pehli baar normal load/refresh ho
+
 window.onload = function(event) {
     if (!history.state) {
-    history.replaceState({ activeScreen: "screen-subjects" }, "");
+        history.replaceState({ activeScreen: "screen-subjects" }, "");
     }
     initDashboard();
 };
@@ -449,4 +405,4 @@ window.onpageshow = function(event) {
         initDashboard();
     }
 };
-    
+  
