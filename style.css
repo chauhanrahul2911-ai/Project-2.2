@@ -382,7 +382,8 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .subject-header-img {
     width: 240px;           /* 👈 Direct 240px BADA SIZE */
     height: auto;
-    max-height: 210px;      /* 👈 Height limit kafi badha di */
+    max-height: 210px;  /* 👈 Height limit kafi badha di */
+    background-color:white;
     object-fit: contain;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
     margin-right: -15px;    /* Right side me set karne ke liye */
