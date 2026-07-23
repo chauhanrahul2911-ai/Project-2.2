@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSRTC Conductor Prep 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Hind+Vadodara:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-navbar">
+        <button class="menu-trigger" onclick="toggleSidebar()">☰</button>
+        <span>શ્રી સરસ્વતી કરિયર એકેડમી</span>
+    </div>
+
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+        <div class="sidebar-brand">શ્રી સરસ્વતી કરિયર એકેડમી</div>
+        
+        <div id="profile-area" class="profile-section"></div>
+
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active-menu" onclick="changeScreenFromSidebar('screen-subjects')">🏠 Home Dashboard</li>
+            <li class="sidebar-item" onclick="alert('તમારો કુલ સ્કોર પ્રોફાઇલ સેક્શનમાં જોઈ શકાય છે.')">📊 My Progress Report</li>
+            <li class="sidebar-item" onclick="alert('WhatsApp Help Support: 9999999999')">💬 Contact Support Help</li>
+        </ul>
+    </div>
+
+    <!-- SCREEN 1: SUBJECTS -->
+<div id="screen-subjects" class="screen active">
+    
+    <!-- NEW CUSTOM BANNER HEADER -->
+    <div class="subject-header-card">
+        <div class="subject-header-left">
+            <h1>વિષય વાઇઝ ટેસ્ટ સિરીઝ</h1>
+            <div class="subject-title-line"></div>
+            <p>તમારો વિષય પસંદ કરો અને<br>તૈયારીની શરૂઆત કરો.</p>
+        </div>
+        <div class="subject-header-right">
+            <img src="assets/icon/book.png" alt="Study Books" class="subject-header-img">
+        </div>
+    </div>
+
+    <div class="grid" id="subjects-container"></div>
+</div>
+    
+    <!-- SCREEN 2: BRANCHES (CHAPTERS) -->
+    <div id="screen-branches" class="screen">
+        <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
+        
+        <!-- NEW PREMIUM BANNER HEADER -->
+        <!-- UPDATED CLEAN BRANCH BANNER HEADER -->
+<div class="branch-header-card">
+    <div class="header-main-info">
+        <div class="header-icon-box">📖</div>
+        <div class="header-text-box">
+            <h1 id="current-subject-title-branch">વિષયનું નામ</h1>
+            <p>તમારો ચેપ્ટર પસંદ કરો</p>
+        </div>
+    </div>
+
+    <div class="header-stats-row">
+        <div class="stat-item">
+            <span class="stat-icon blue-bg">📄</span>
+            <div class="stat-details">
+                <span class="stat-label">કુલ ચેપ્ટર</span>
+                <span class="stat-value" id="stat-total-chapters">0</span>
+            </div>
+        </div>
+        
+        <div class="stat-divider"></div>
+        
+        <div class="stat-item">
+            <span class="stat-icon green-bg">✓</span>
+            <div class="stat-details">
+                <span class="stat-label">પૂર્ણ થયેલ</span>
+                <span class="stat-value" id="stat-completed-chapters">0</span>
+            </div>
+        </div>
+        
+        <div class="stat-divider"></div>
+        
+        <div class="stat-item">
+            <span class="stat-icon orange-bg">↗</span>
+            <div class="stat-details">
+                <span class="stat-label">તમારી પ્રગતિ</span>
+                <span class="stat-value" id="stat-progress-perc">0%</span>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom Progress Section removed for a cleaner look -->
+</div>
+
+
+        <div class="grid" id="branches-container"></div>
+    </div>
+    
+    <!-- SCREEN 3: TYPE SELECT -->
+    <div id="screen-type-select" class="screen">
+        <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
+        <header>
+            <h1 id="current-subject-name">વિષય</h1>
+            <p>તમારો ટેસ્ટ પ્રકાર પસંદ કરો</p>
+        </header>
+        <div class="grid" style="margin-top: 3rem;">
+            <div class="card" style="padding: 2.5rem; flex-direction:column; justify-content: center;" onclick="goToQuizList('Quiz')">
+                <span>Topic Quiz (ટોપિક ક્વિઝ)</span>
+                <span class="sub-perc" id="quiz-type-perc">Progress: 0%</span>
+            </div>
+            <div class="card" style="padding: 2.5rem; flex-direction:column; justify-content: center;" onclick="goToQuizList('Mock Test')">
+                <span>Full Mock Test (મોક ટેસ્ટ)</span>
+                <span class="sub-perc" id="mock-type-perc">Progress: 0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: QUIZ LIST -->
+    <div id="screen-quiz-list" class="screen">
+        <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
+        <header>
+            <h1 id="current-list-title">ટેસ્ટ લિસ્ટ</h1>
+            <p>પ્રેક્ટિસ શરૂ કરવા માટે ટેસ્ટ પર ક્લિક કરો</p>
+        </header>
+        <div id="dynamic-list-container" style="margin-top: 2rem;"></div>
+    </div>
+
+    <!-- PAYWALL MODAL -->
+    <div id="paywall-modal" class="modal">
+        <div class="modal-content">
+            <h3>🔒 પ્રીમિયમ પ્લાન</h3>
+            <p>ટેસ્ટ 4 થી આગળના બધા ક્વિઝ અને મોક ટેસ્ટ આ પ્લાનથી ખૂલે છે.</p>
+            <h2 style="color:var(--gold); margin: 15px 0;">₹149</h2>
+            <button class="btn" style="width: 100%; margin-bottom: 0.7rem;" onclick="simulatePayment()">Buy Now</button>
+            <button class="back-btn" onclick="closePaywall()">બંધ કરો</button>
+        </div>
+    </div>
+
+<script src="main.js"></script>
+</body>
+</html>
