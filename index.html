@@ -99,24 +99,58 @@
         <div class="grid" id="branches-container"></div>
     </div>
     
-    <!-- SCREEN 3: TYPE SELECT -->
-    <div id="screen-type-select" class="screen">
-        <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
-        <header>
-            <h1 id="current-subject-name">વિષય</h1>
-            <p>તમારો ટેસ્ટ પ્રકાર પસંદ કરો</p>
-        </header>
-        <div class="grid" style="margin-top: 3rem;">
-            <div class="card" style="padding: 2.5rem; flex-direction:column; justify-content: center;" onclick="goToQuizList('Quiz')">
-                <span>Topic Quiz (ટોપિક ક્વિઝ)</span>
-                <span class="sub-perc" id="quiz-type-perc">Progress: 0%</span>
-            </div>
-            <div class="card" style="padding: 2.5rem; flex-direction:column; justify-content: center;" onclick="goToQuizList('Mock Test')">
-                <span>Full Mock Test (મોક ટેસ્ટ)</span>
-                <span class="sub-perc" id="mock-type-perc">Progress: 0%</span>
+<!-- SCREEN 3: TYPE SELECT -->
+<div id="screen-type-select" class="screen">
+    <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
+    
+    <!-- MATCHING BANNER HEADER -->
+    <div class="branch-header-card">
+        <div class="header-main-info" style="margin-bottom:0;">
+            <div class="header-icon-box">🎯</div>
+            <div class="header-text-box">
+                <h1 id="current-subject-name">વિષયનું નામ</h1>
+                <p>તમારો ટેસ્ટ પ્રકાર પસંદ કરો</p>
             </div>
         </div>
     </div>
+
+    <!-- MODERN ACTION CARDS -->
+    <div class="type-cards-grid">
+        <!-- TOPIC QUIZ CARD -->
+        <div class="type-card" onclick="goToQuizList('Quiz')">
+            <div class="type-card-left">
+                <div class="type-icon-box quiz-bg">
+                    ⚡
+                </div>
+                <div class="type-info">
+                    <div class="type-title">Topic Quiz (ટોપિક ક્વિઝ)</div>
+                    <div class="type-subtext">ચેપ્ટર વાઇઝ ટૂંકી ક્વિઝ પ્રેક્ટિસ</div>
+                </div>
+            </div>
+            <div class="type-card-right">
+                <span class="type-perc-badge" id="quiz-type-perc">Progress: 0%</span>
+                <span class="card-arrow">➔</span>
+            </div>
+        </div>
+
+        <!-- MOCK TEST CARD -->
+        <div class="type-card" onclick="goToQuizList('Mock Test')">
+            <div class="type-card-left">
+                <div class="type-icon-box mock-bg">
+                    🏆
+                </div>
+                <div class="type-info">
+                    <div class="type-title">Full Mock Test (મોક ટેસ્ટ)</div>
+                    <div class="type-subtext">પૂરા સિલેબસની સમયબદ્ધ પરીક્ષા</div>
+                </div>
+            </div>
+            <div class="type-card-right">
+                <span class="type-perc-badge" id="mock-type-perc">Progress: 0%</span>
+                <span class="card-arrow">➔</span>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- SCREEN 4: QUIZ LIST -->
     <div id="screen-quiz-list" class="screen">
