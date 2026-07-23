@@ -326,28 +326,27 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .subject-header-card {
     background: linear-gradient(135deg, #071e3d 0%, #0f2340 50%, #16325c 100%);
     border-radius: 20px;
-    padding: 1.8rem 1.5rem;
+    padding: 1.5rem;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 15px; /* Text aur Image ke beech safe distance */
     box-shadow: 0 10px 25px rgba(7, 30, 61, 0.25);
     margin-bottom: 1.8rem;
     position: relative;
-    overflow: hidden; /* Modern card look */
+    overflow: hidden;
     border-bottom: 4px solid #f97316;
-    min-height: 180px; /* Card ki height thodi badhayi */
 }
 
 .subject-header-left {
-    flex: 1.2;
+    flex: 1; /* Text apni jagah khud adjust karega */
     z-index: 2;
-    padding-right: 15px;
 }
 
 .subject-header-left h1 {
     font-family: var(--font-body);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #ffffff;
     line-height: 1.3;
@@ -359,54 +358,45 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     height: 4px;
     background-color: var(--gold-light, #d9a757);
     border-radius: 4px;
-    margin: 10px 0 12px 0;
+    margin: 8px 0 10px 0;
 }
 
 .subject-header-left p {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: #cbd5e0;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
 }
 
-/* IMAGE CONTAINER & FULL SIZE IMAGE */
+/* RIGHT IMAGE CONTAINER */
 .subject-header-right {
-    flex: 1;
+    flex-shrink: 0; /* Image text ko push nahi karegi */
     z-index: 2;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    position: relative;
+    justify-content: center;
 }
 
 .subject-header-img {
-    width: 240px;           /* 👈 Direct 240px BADA SIZE */
+    width: 130px; /* Perfect transparent icon size */
     height: auto;
-    max-height: 210px;  /* 👈 Height limit kafi badha di */
-    background-color:green;
     object-fit: contain;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-    margin-right: -15px;    /* Right side me set karne ke liye */
-    margin-bottom: -10px;   /* Bottom alignment */
-    transform: scale(1.15); /* Sleek 3D pop effect */
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.4));
 }
 
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 480px) {
     .subject-header-card {
-        padding: 1.3rem 1rem;
-        min-height: 160px;
+        padding: 1.2rem 1rem;
     }
     .subject-header-left h1 {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
     }
     .subject-header-left p {
-        font-size: 0.78rem;
+        font-size: 0.75rem;
     }
     .subject-header-img {
-        width: 240px;         /* 👈 Mobile par bhi solid 170px */
-        max-height: 210px;
-        margin-right: -10px;
-        transform: scale(1.1);
+        width: 100px;
     }
 }
+    
