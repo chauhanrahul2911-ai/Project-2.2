@@ -403,8 +403,8 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
         font-size: 0.78rem;
     }
     .subject-header-img {
-        width: 170px;         /* 👈 Mobile par bhi solid 170px */
-        max-height: 160px;
+        width: 240px;         /* 👈 Mobile par bhi solid 170px */
+        max-height: 210px;
         margin-right: -10px;
         transform: scale(1.1);
     }
