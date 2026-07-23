@@ -1,7 +1,9 @@
-// MASTER DATA STRUCTURE
+// MASTER DATA STRUCTURE WITH TWO-WAY ICONS (PNG + EMOJI FALLBACK)
 const subjectData = {
   samanya_gyan: {
     gujName: "સામાન્ય જ્ઞાન",
+    iconImg: "assets/icon/gk.png",
+    iconEmoji: "📜",
     branches: {
       gujarat_history: { gujName: "ગુજરાતનો ઇતિહાસ", totalTests: 5 },
       gujarat_geography: { gujName: "ગુજરાતની ભૂગોળ", totalTests: 8 },
@@ -10,6 +12,8 @@ const subjectData = {
   },
   computer_gyan: {
     gujName: "કમ્પ્યુટર જ્ઞાન",
+    iconImg: "assets/icon/computer.png",
+    iconEmoji: "💻",
     branches: {
       computer_intro: { gujName: "કમ્પ્યુટર પરિચય", totalTests: 5 },
       ms_office: { gujName: "એમ.એસ. ઓફિસ", totalTests: 6 }
@@ -17,36 +21,48 @@ const subjectData = {
   },
   gujarati_vyakaran: {
     gujName: "ગુજરાતી વ્યાકરણ",
+    iconImg: "assets/icon/gujarati.png",
+    iconEmoji: "✍️",
     branches: {
       grammar: { gujName: "જોડણી અને વ્યાકરણ", totalTests: 5 }
     }
   },
   english_grammar: {
     gujName: "અંગ્રેજી વ્યાકરણ",
+    iconImg: "assets/icon/english.png",
+    iconEmoji: "🔤",
     branches: {
       tenses: { gujName: "Tenses & Grammar", totalTests: 5 }
     }
   },
   maths_reasoning: {
     gujName: "એપ્ટિટ્યુડ અને રીઝનીંગ",
+    iconImg: "assets/icon/maths.png",
+    iconEmoji: "📐",
     branches: {
       maths_reasoning: { gujName: "ગણિત અને તાર્કિક કસોટી", totalTests: 5 }
     }
   },
   conductor_info: {
     gujName: "નિગમને લગતી માહિતી",
+    iconImg: "assets/icon/bus.png",
+    iconEmoji: "🚌",
     branches: {
       conductor_duties: { gujName: "કંડક્ટર ફરજો અને ફર્સ્ટ એઇડ", totalTests: 5 }
     }
   },
   motor_vehicle_act: {
     gujName: "મોટર વ્હીકલ એક્ટ",
+    iconImg: "assets/icon/act.png",
+    iconEmoji: "🚦",
     branches: {
       traffic_rules: { gujName: "ટ્રાફિક નિયમો અને એક્ટ", totalTests: 5 }
     }
   },
   road_safety: {
     gujName: "રોડ સેફ્ટી",
+    iconImg: "assets/icon/road.png",
+    iconEmoji: "🛡️",
     branches: {
       road_safety: { gujName: "રોડ સેફ્ટી અને ઓટોમોબાઈલ", totalTests: 5 }
     }
@@ -165,21 +181,30 @@ function updateProfileUI() {
     }
 }
 
-// --- SCREEN 1: SUBJECTS DISPLAY ---
+// --- SCREEN 1: SUBJECTS DISPLAY (TWO-WAY FALLBACK SYSTEM) ---
 function buildSubjectCards() {
     const container = document.getElementById('subjects-container');
     container.innerHTML = "";
 
-    syllabusSubjects.forEach((subKey, index) => {
+    syllabusSubjects.forEach((subKey) => {
         let progress = getSubjectProgress(subKey);
-        let gujSubjectName = subjectData[subKey].gujName;
+        let subObj = subjectData[subKey];
+        let gujSubjectName = subObj.gujName;
+        let iconPath = subObj.iconImg || "";
+        let fallbackEmoji = subObj.iconEmoji || "📚";
 
         const card = document.createElement('div');
         card.className = "card";
         card.onclick = () => goToBranchSelect(subKey); 
+        
         card.innerHTML = `
             <div class="card-left">
-                <span class="card-num">${String(index + 1).padStart(2, '0')}</span>
+                <div class="card-icon-box">
+                    ${iconPath ? 
+                        `<img src="${iconPath}" alt="${gujSubjectName}" onerror="this.outerHTML='<span class=\"fallback-emoji\">${fallbackEmoji}</span>'">` 
+                        : `<span class="fallback-emoji">${fallbackEmoji}</span>`
+                    }
+                </div>
                 <span class="card-title">${gujSubjectName}</span>
             </div>
             <div class="ring" style="--pct:${progress};"><div class="ring-inner">${progress}%</div></div>
