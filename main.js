@@ -181,7 +181,7 @@ function updateProfileUI() {
     }
 }
 
-// --- SCREEN 1: SUBJECTS DISPLAY (TWO-WAY FALLBACK SYSTEM) ---
+// --- SCREEN 1: SUBJECTS DISPLAY (CLEAN TWO-WAY FALLBACK) ---
 function buildSubjectCards() {
     const container = document.getElementById('subjects-container');
     container.innerHTML = "";
@@ -200,10 +200,8 @@ function buildSubjectCards() {
         card.innerHTML = `
             <div class="card-left">
                 <div class="card-icon-box">
-                    ${iconPath ? 
-                        `<img src="${iconPath}" alt="${gujSubjectName}" onerror="this.outerHTML='<span class=\"fallback-emoji\">${fallbackEmoji}</span>'">` 
-                        : `<span class="fallback-emoji">${fallbackEmoji}</span>`
-                    }
+                    <span class="fallback-emoji">${fallbackEmoji}</span>
+                    ${iconPath ? `<img src="${iconPath}" alt="${gujSubjectName}" class="card-img-icon" onerror="this.style.display='none'">` : ''}
                 </div>
                 <span class="card-title">${gujSubjectName}</span>
             </div>
