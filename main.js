@@ -21,7 +21,7 @@ const subjectData = {
   },
   gujarati_vyakaran: {
     gujName: "ગુજરાતી વ્યાકરણ",
-    iconImg: "assets/icon/gujarati.png",
+    iconImg: "assets/icon/gujarati.webp",
     iconEmoji: "✍️",
     branches: {
       grammar: { gujName: "જોડણી અને વ્યાકરણ", totalTests: 5 }
