@@ -153,14 +153,23 @@
 </div>
 
     <!-- SCREEN 4: QUIZ LIST -->
-    <div id="screen-quiz-list" class="screen">
-        <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
-        <header>
-            <h1 id="current-list-title">ટેસ્ટ લિસ્ટ</h1>
-            <p>પ્રેક્ટિસ શરૂ કરવા માટે ટેસ્ટ પર ક્લિક કરો</p>
-        </header>
-        <div id="dynamic-list-container" style="margin-top: 2rem;"></div>
+<div id="screen-quiz-list" class="screen">
+    <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
+    
+    <!-- MATCHING BANNER HEADER -->
+    <div class="branch-header-card">
+        <div class="header-main-info" style="margin-bottom:0;">
+            <div class="header-icon-box">📝</div>
+            <div class="header-text-box">
+                <h1 id="current-list-title">ટેસ્ટ લિસ્ટ</h1>
+                <p>પ્રેક્ટિસ શરૂ કરવા માટે ટેસ્ટ પસંદ કરો</p>
+            </div>
+        </div>
     </div>
+
+    <!-- DYNAMIC QUIZ LIST CARDS CONTAINER -->
+    <div id="dynamic-list-container" class="quiz-list-container"></div>
+</div>
 
     <!-- PAYWALL MODAL -->
     <div id="paywall-modal" class="modal">
