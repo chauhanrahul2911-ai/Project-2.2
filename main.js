@@ -309,6 +309,7 @@ function goToQuizList(type) {
     changeScreen('screen-quiz-list');
 }
 
+// --- SCREEN 4: QUIZ LIST CARDS BUILDER ---
 function buildQuizRows() {
     const container = document.getElementById('dynamic-list-container');
     container.innerHTML = "";
@@ -319,18 +320,31 @@ function buildQuizRows() {
     for (let i = 1; i <= totalTests; i++) {
         let isLocked = (i > 3 && !isPremiumUser); 
         let storageKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_score`;
-        let savedScore = localStorage.getItem(storageKey) || "0"; 
+        let savedScore = localStorage.getItem(storageKey);
+        let isAttempted = savedScore !== null;
+        let scoreValue = isAttempted ? parseInt(savedScore) : 0;
 
         const row = document.createElement('div');
-        row.className = `list-item ${isLocked ? 'locked' : ''}`;
+        row.className = `quiz-row-card ${isLocked ? 'locked' : ''}`;
+        
         row.innerHTML = `
-            <div>
-                <span style="margin-right:10px;">${isLocked ? '🔒' : '🔓'}</span>
-                <span>${currentType} નંબર - ${i}</span>
+            <div class="quiz-card-left">
+                <div class="quiz-status-icon ${isLocked ? 'lock-bg' : (isAttempted ? 'done-bg' : 'start-bg')}">
+                    ${isLocked ? '🔒' : (isAttempted ? '✓' : '⚡')}
+                </div>
+                <div class="quiz-card-info">
+                    <div class="quiz-card-title">${currentType} - ${String(i).padStart(2, '0')}</div>
+                    <div class="quiz-card-subtext">
+                        ${isLocked ? 'પ્રીમિયમ ટેસ્ટ' : (isAttempted ? `છેલ્લો સ્કોર: ${scoreValue}%` : 'અત્યાર સુધી આપેલ નથી')}
+                    </div>
+                </div>
             </div>
-            <div style="display:flex; align-items:center; gap:15px;">
-                <span class="score-chip">${savedScore}%</span>
-                <span style="color:#bbb;">➔</span>
+            
+            <div class="quiz-card-right">
+                ${isAttempted && !isLocked ? `<span class="score-chip">${scoreValue}%</span>` : ''}
+                <span class="quiz-action-btn ${isLocked ? 'btn-lock' : 'btn-play'}">
+                    ${isLocked ? 'Unlock' : (isAttempted ? 'Retest' : 'Start')} ➔
+                </span>
             </div>
         `;
 
@@ -339,7 +353,9 @@ function buildQuizRows() {
                 if (!localStorage.getItem('gsrtc_logged_user')) {
                     alert("🔒 આગળના પ્રીમિયમ ટેસ્ટ માટે કૃપા કરીને પહેલા Google વડે લોગિન કરો.");
                     loginWithGoogle();
-                } else { openPaywall(); }
+                } else { 
+                    openPaywall(); 
+                }
             } else {
                 localStorage.setItem('last_active_subject', currentSubject);
                 localStorage.setItem('last_active_branch', currentBranch);
