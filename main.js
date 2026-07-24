@@ -2,7 +2,7 @@
 const subjectData = {
   samanya_gyan: {
     gujName: "સામાન્ય જ્ઞાન",
-    iconImg: "assets/icon/gk.png",
+    iconImg: "assets/icon/gk.webp",
     iconEmoji: "📜",
     branches: {
       gujarat_history: { gujName: "ગુજરાતનો ઇતિહાસ", totalTests: 5 },
