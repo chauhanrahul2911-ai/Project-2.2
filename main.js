@@ -12,7 +12,7 @@ const subjectData = {
   },
   computer_gyan: {
     gujName: "કમ્પ્યુટર જ્ઞાન",
-    iconImg: "assets/icon/computer.png",
+    iconImg: "assets/icon/computer.webp",
     iconEmoji: "💻",
     branches: {
       computer_intro: { gujName: "કમ્પ્યુટર પરિચય", totalTests: 5 },
@@ -29,7 +29,7 @@ const subjectData = {
   },
   english_grammar: {
     gujName: "અંગ્રેજી વ્યાકરણ",
-    iconImg: "assets/icon/english.png",
+    iconImg: "assets/icon/english.webp",
     iconEmoji: "🔤",
     branches: {
       tenses: { gujName: "Tenses & Grammar", totalTests: 5 }
@@ -37,7 +37,7 @@ const subjectData = {
   },
   maths_reasoning: {
     gujName: "એપ્ટિટ્યુડ અને રીઝનીંગ",
-    iconImg: "assets/icon/maths.png",
+    iconImg: "assets/icon/maths.webp",
     iconEmoji: "📐",
     branches: {
       maths_reasoning: { gujName: "ગણિત અને તાર્કિક કસોટી", totalTests: 5 }
@@ -45,7 +45,7 @@ const subjectData = {
   },
   conductor_info: {
     gujName: "નિગમને લગતી માહિતી",
-    iconImg: "assets/icon/bus.png",
+    iconImg: "assets/icon/bus.webp",
     iconEmoji: "🚌",
     branches: {
       conductor_duties: { gujName: "કંડક્ટર ફરજો અને ફર્સ્ટ એઇડ", totalTests: 5 }
@@ -53,7 +53,7 @@ const subjectData = {
   },
   motor_vehicle_act: {
     gujName: "મોટર વ્હીકલ એક્ટ",
-    iconImg: "assets/icon/act.png",
+    iconImg: "assets/icon/act.webp",
     iconEmoji: "🚦",
     branches: {
       traffic_rules: { gujName: "ટ્રાફિક નિયમો અને એક્ટ", totalTests: 5 }
@@ -61,7 +61,7 @@ const subjectData = {
   },
   road_safety: {
     gujName: "રોડ સેફ્ટી",
-    iconImg: "assets/icon/road.png",
+    iconImg: "assets/icon/road.webp",
     iconEmoji: "🛡️",
     branches: {
       road_safety: { gujName: "રોડ સેફ્ટી અને ઓટોમોબાઈલ", totalTests: 5 }
