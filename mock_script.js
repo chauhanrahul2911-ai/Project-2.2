@@ -199,12 +199,29 @@ function buildGridSheet() {
     quizData.forEach((_, idx) => updateGridCellState(idx));
 }
 
+// --- UPDATE IN UPDATE GRID CELL STATE FOR REVIEW MODE ---
 function updateGridCellState(idx) {
     const cell = document.getElementById(`cell-grid-${idx}`);
     if(!cell) return;
-    const itemUniqueId = quizData[idx].id;
-    cell.classList.remove('answered');
-    if(userAnswers.hasOwnProperty(itemUniqueId)) cell.classList.add('answered');
+    const item = quizData[idx];
+    const itemUniqueId = item.id;
+
+    cell.classList.remove('answered', 'wrong-cell', 'skipped-cell');
+
+    if (testSubmitted) {
+        // REVIEW MODE COLORS
+        const chosenIdx = userAnswers.hasOwnProperty(itemUniqueId) ? userAnswers[itemUniqueId] : null;
+        if (chosenIdx === null) {
+            cell.classList.add('skipped-cell'); // Left -> Gray
+        } else if (chosenIdx === item.correct) {
+            cell.classList.add('answered'); // Right -> Green
+        } else {
+            cell.classList.add('wrong-cell'); // Wrong -> Red
+        }
+    } else {
+        // LIVE TEST MODE COLORS
+        if(userAnswers.hasOwnProperty(itemUniqueId)) cell.classList.add('answered');
+    }
 }
 
 function openPalette() {
@@ -272,7 +289,7 @@ function autoTimeOutTrigger() {
     processResults(true);
 }
 
-// ================== METRICS MATHEMATICAL COMPILER ==================
+// --- UPDATE IN processResults() FUNCTION ---
 function processResults(forced = false) {
     if(testSubmitted) return;
     closeSubmitModal();
@@ -280,7 +297,7 @@ function processResults(forced = false) {
     testSubmitted = true;
 
     document.getElementById('mock-test-form').classList.add('submitted');
-    document.getElementById('test-header').style.display = 'none'; // GAYAB STICKY NAVBAR ON RESULT
+    document.getElementById('test-header').style.display = 'none'; 
     document.getElementById('questions-area').style.display = 'none';
 
     let elapsedSeconds = 1500 - timeLeft;
@@ -341,11 +358,8 @@ function processResults(forced = false) {
     if(displayRingPct < 0) displayRingPct = 0;
 
     document.getElementById('result-ring').style.setProperty('--pct', Math.round(displayRingPct));
-
-    // Percentage se .00 hata kar round figure kar diya (e.g., 7%)
     document.getElementById('result-pct').innerText = Math.round(displayRingPct) + '%';
 
-    // Score mein agar decimal zaroori ho tabhi dikhega (e.g., 1.75 / 25, aur 2 / 25)
     document.getElementById('final-score').innerText = `${Number(finalRealScore.toFixed(2))} / ${quizData.length}`;    
     document.getElementById('stat-time-taken').innerText = timeTakenString;
     document.getElementById('stat-attempted').innerText = attemptedTotal;
@@ -356,8 +370,12 @@ function processResults(forced = false) {
 
     document.getElementById('result-panel').style.display = 'block';
     
+    // 💾 SAVE SCORE & TIME TAKEN IN LOCALSTORAGE
     let masterSaveKey = `${subject}_${localStorage.getItem('last_active_branch_guj')}_${type}_${quizNo}_score`;
+    let timeSaveKey = `${subject}_${localStorage.getItem('last_active_branch_guj')}_${type}_${quizNo}_time`;
+
     localStorage.setItem(masterSaveKey, Math.round(displayRingPct));
+    localStorage.setItem(timeSaveKey, timeTakenString);
 
     localStorage.removeItem(STORAGE_KEY);
     window.scrollTo({ top: 0, behavior: 'smooth' });
