@@ -319,8 +319,12 @@ function buildQuizRows() {
 
     for (let i = 1; i <= totalTests; i++) {
         let isLocked = (i > 3 && !isPremiumUser); 
-        let storageKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_score`;
-        let savedScore = localStorage.getItem(storageKey);
+        let scoreKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_score`;
+        let timeKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_time`;
+        
+        let savedScore = localStorage.getItem(scoreKey);
+        let savedTime = localStorage.getItem(timeKey);
+        
         let isAttempted = savedScore !== null;
         let scoreValue = isAttempted ? parseInt(savedScore) : 0;
 
@@ -335,13 +339,12 @@ function buildQuizRows() {
                 <div class="quiz-card-info">
                     <div class="quiz-card-title">${currentType} - ${String(i).padStart(2, '0')}</div>
                     <div class="quiz-card-subtext">
-                        ${isLocked ? 'પ્રીમિયમ ટેસ્ટ' : (isAttempted ? `છેલ્લો સ્કોર: ${scoreValue}%` : 'અત્યાર સુધી આપેલ નથી')}
+                        ${isLocked ? 'પ્રીમિયમ ટેસ્ટ' : (isAttempted ? `છેલ્લો સ્કોર: ${scoreValue}% ${savedTime ? `(⏱️ ${savedTime})` : ''}` : 'અત્યાર સુધી આપેલ નથી')}
                     </div>
                 </div>
             </div>
             
             <div class="quiz-card-right">
-                ${isAttempted && !isLocked ? `<span class="score-chip">${scoreValue}%</span>` : ''}
                 <span class="quiz-action-btn ${isLocked ? 'btn-lock' : 'btn-play'}">
                     ${isLocked ? 'Unlock' : (isAttempted ? 'Retest' : 'Start')} ➔
                 </span>
