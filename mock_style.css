@@ -221,7 +221,11 @@ form.submitted .opt-label { cursor: default; }
 
 .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
 .palette-cell { aspect-ratio: 1; border-radius: 10px; border: none; font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; cursor: pointer; color: #fff; background: #b9c2d1; display: flex; align-items: center; justify-content: center; min-height: 44px; }
-.palette-cell.answered { background: var(--success); }
+
+/* ⬇️ Nayi 3 lines jo paste karni hain ⬇️ */
+.palette-cell.answered { background: var(--success) !important; }
+.palette-cell.wrong-cell { background: var(--danger) !important; }
+.palette-cell.skipped-cell { background: #b9c2d1 !important; }
 
 /* ============ DIALOG BOX ============ */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); z-index: 400; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(3px); }
