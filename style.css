@@ -553,10 +553,11 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     margin-top: 1rem;
 }
 
+/* --- QUIZ CARD LAYOUT FIX --- */
 .quiz-row-card {
     background: var(--card);
     border-radius: 14px;
-    padding: 1rem 1.1rem;
+    padding: 0.9rem 1rem;
     border: 1px solid var(--line);
     box-shadow: 0 3px 10px rgba(15, 35, 64, 0.04);
     cursor: pointer;
@@ -582,6 +583,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     align-items: center;
     gap: 12px;
     flex: 1;
+    min-width: 0;
 }
 
 .quiz-status-icon {
@@ -604,16 +606,23 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .quiz-card-info {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
     flex: 1;
-    min-width: 0; /* Prevents unwanted text wrapping */
+    min-width: 0;
 }
 
 .quiz-card-title {
     font-weight: 700;
-    font-size: 1.02rem;
+    font-size: 1rem;
     color: var(--ink);
-    letter-spacing: 0.2px;
+}
+
+/* TIME & SCORE STACK (Time Niche Aa Gaya) */
+.quiz-stats-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
 }
 
 .stats-pill-group {
@@ -624,11 +633,11 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 }
 
 .stat-pill {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     padding: 2px 8px;
     border-radius: 6px;
-    white-space: nowrap; /* Single line guarantee */
+    white-space: nowrap;
 }
 
 .score-pill {
@@ -645,7 +654,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 }
 
 .status-tag {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--ink-soft);
 }
 
@@ -654,21 +663,28 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     color: var(--ink-soft);
 }
 
+/* --- BUTTON FIX (SAME FIXED SIZE & NO OVERFLOW) --- */
 .quiz-card-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: flex-end;
     flex-shrink: 0;
 }
 
 .quiz-action-btn {
-    font-size: 0.82rem;
+    width: 82px;            /* Fixed Same Width for Retest, Start, Unlock */
+    height: 34px;           /* Fixed Same Height */
+    font-size: 0.78rem;
     font-weight: 700;
-    padding: 6px 12px;
+    border: none;
     border-radius: 8px;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    gap: 2px;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .btn-play { background: var(--gold-wash); color: var(--gold); }
