@@ -19,7 +19,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font-body); background-color: var(--paper); color: var(--ink); position: relative; overflow-x: hidden; }
 
-/* HEADER & MENU BAR */
+/* HEADER & MENU BAR  */
 .top-navbar {
     background: var(--ink);
     color: white;
