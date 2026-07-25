@@ -381,18 +381,28 @@ function processResults(forced = false) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// REVIEW ANSWERS CLICK
+// --- UPDATE IN REVIEW BUTTON CLICK ---
 document.getElementById('btn-review').onclick = () => {
     document.getElementById('result-panel').style.display = 'none'; 
     document.body.classList.add('review-mode');
     
-    // TOGGLE HEADERS FOR CLEAN SINGLE LINE IN REVIEW MODE
     document.getElementById('test-header').style.display = 'none';
     document.getElementById('review-header').style.display = 'block';
-
     document.getElementById('questions-area').style.display = 'block';
     
-    // UPDATE BOTTOM BUTTON TO FINISH REVIEW
+    // UPDATE PALETTE LEGEND FOR REVIEW MODE
+    const legend = document.getElementById('palette-legend');
+    if (legend) {
+        legend.innerHTML = `
+            <span><i style="background:var(--success)"></i>સાચો</span>
+            <span><i style="background:var(--danger)"></i>ખોટો</span>
+            <span><i style="background:#b9c2d1"></i>છોડેલ</span>
+        `;
+    }
+    
+    // REFRESH PALETTE CELLS
+    quizData.forEach((_, idx) => updateGridCellState(idx));
+
     const bottomBtn = document.getElementById('btn-main-submit');
     bottomBtn.innerText = "Finish Review (પરિણામ પર વળદો)";
     bottomBtn.style.background = "var(--ink)";
