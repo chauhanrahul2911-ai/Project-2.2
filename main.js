@@ -332,24 +332,33 @@ function buildQuizRows() {
         row.className = `quiz-row-card ${isLocked ? 'locked' : ''}`;
         
         row.innerHTML = `
-            <div class="quiz-card-left">
-                <div class="quiz-status-icon ${isLocked ? 'lock-bg' : (isAttempted ? 'done-bg' : 'start-bg')}">
-                    ${isLocked ? '🔒' : (isAttempted ? '✓' : '⚡')}
-                </div>
-                <div class="quiz-card-info">
-                    <div class="quiz-card-title">${currentType} - ${String(i).padStart(2, '0')}</div>
-                    <div class="quiz-card-subtext">
-                        ${isLocked ? 'પ્રીમિયમ ટેસ્ટ' : (isAttempted ? `છેલ્લો સ્કોર: ${scoreValue}% ${savedTime ? `(⏱️ ${savedTime})` : ''}` : 'અત્યાર સુધી આપેલ નથી')}
-                    </div>
-                </div>
+        <div class="quiz-card-left">
+        <div class="quiz-status-icon ${isLocked ? 'lock-bg' : (isAttempted ? 'done-bg' : 'start-bg')}">
+            ${isLocked ? '🔒' : (isAttempted ? '✓' : '⚡')}
+        </div>
+        <div class="quiz-card-info">
+            <div class="quiz-card-title">${currentType} - ${String(i).padStart(2, '0')}</div>
+            <div class="quiz-card-subtext">
+                ${isLocked 
+                    ? '<span class="status-tag lock-tag">પ્રીમિયમ ટેસ્ટ</span>' 
+                    : (isAttempted 
+                        ? `<div class="stats-pill-group">
+                            <span class="stat-pill score-pill">સ્કોર: ${scoreValue}%</span>
+                            ${savedTime ? `<span class="stat-pill time-pill">⏱️ ${savedTime}</span>` : ''}
+                           </div>` 
+                        : '<span class="status-tag unattempted-tag">અત્યાર સુધી આપેલ નથી</span>'
+                      )
+                }
             </div>
-            
-            <div class="quiz-card-right">
-                <span class="quiz-action-btn ${isLocked ? 'btn-lock' : 'btn-play'}">
-                    ${isLocked ? 'Unlock' : (isAttempted ? 'Retest' : 'Start')} ➔
-                </span>
-            </div>
-        `;
+        </div>
+    </div>
+    
+    <div class="quiz-card-right">
+        <span class="quiz-action-btn ${isLocked ? 'btn-lock' : 'btn-play'}">
+            ${isLocked ? 'Unlock' : (isAttempted ? 'Retest' : 'Start')} ➔
+        </span>
+    </div>
+   `;
 
         row.onclick = function() {
             if (isLocked) {
