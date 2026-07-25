@@ -1,4 +1,4 @@
-// MASTER DATA STRUCTURE WITH TWO-WAY ICONS (PNG + EMOJI FALLBACK)
+// MASTER DATA STRUCTURE WITH TWO-WAY ICONS (PNG +  EMOJI FALLBACK)
 const subjectData = {
   samanya_gyan: {
     gujName: "સામાન્ય જ્ઞાન",
