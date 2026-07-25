@@ -600,16 +600,53 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .done-bg { background: #f0fdf4; color: #16a34a; }
 .lock-bg { background: #f1f5f9; color: #64748b; }
 
+/* --- CLEAN QUIZ CARD ALIGNMENT FIX --- */
 .quiz-card-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 5px;
+    flex: 1;
+    min-width: 0; /* Prevents unwanted text wrapping */
 }
 
 .quiz-card-title {
     font-weight: 700;
-    font-size: 0.98rem;
+    font-size: 1.02rem;
     color: var(--ink);
+    letter-spacing: 0.2px;
+}
+
+.stats-pill-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap; /* Text ko kabi bhi doosri line me jaane nahi dega */
+}
+
+.stat-pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap; /* Single line guarantee */
+}
+
+.score-pill {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+
+.time-pill {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    font-family: var(--font-mono);
+}
+
+.status-tag {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
 }
 
 .quiz-card-subtext {
