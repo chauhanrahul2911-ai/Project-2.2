@@ -379,8 +379,8 @@ function buildQuizRows() {
                         ? '<span class="status-tag lock-tag">પ્રીમિયમ ટેસ્ટ</span>'
                         : (isAttempted
                             ? `<div class="stats-pill-group">
-                                <span class="score-pill-clean">🏆 ${scoreValue}%</span>
-                                ${savedTime ? `<span class="time-pill-clean">⏱️ ${formatTestTime(savedTime)}</span>` : ''}
+                                <span class="score-pill-clean">${scoreValue}%</span>
+                                ${savedTime ? `<span class="time-pill-clean">${formatTestTime(savedTime)}</span>` : ''}
                                </div>`
                             : '<span class="unattempted-tag">હજુ સુધી ટેસ્ટ આપ્યો નથી</span>'
                           )
