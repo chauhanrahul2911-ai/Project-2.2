@@ -18,18 +18,17 @@
 
 <div id="explainModal" class="modal">
     <div class="explain-content">
+        <button type="button" class="modal-close-x" onclick="closeExplain()">×</button>
         <h3>💡 Explanation</h3>
         <p id="explain-text" style="display:none;"></p>
         <img id="explain-img" class="explain-img-full" style="display:none;">
-        <button class="close-explain" onclick="closeExplain()">Close & Continue</button>
     </div>
 </div>
 
 <div id="zoomModal" class="modal">
     <div class="explain-content">
-        <h3>🔍 Image</h3>
+        <button type="button" class="modal-close-x" onclick="closeZoom()">×</button>
         <img id="fullImg" class="explain-img-full">
-        <button class="close-explain" onclick="closeZoom()">Close</button>
     </div>
 </div>
 
@@ -88,5 +87,4 @@
 
 <script src="quiz_player.js"></script>
 </body>
-  </html>
-  
+</html>
