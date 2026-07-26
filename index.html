@@ -152,18 +152,28 @@
     </div>
 </div>
 
-    <!-- SCREEN 4: QUIZ LIST -->
+<!-- SCREEN 4: QUIZ LIST -->
 <div id="screen-quiz-list" class="screen">
-    <button class="back-btn" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
+    <!-- FIX 10: Touch-friendly Back Chip -->
+    <button class="back-btn-chip" onclick="window.history.back()">⬅️ પાછા જાઓ</button>
     
-    <!-- MATCHING BANNER HEADER -->
-    <div class="branch-header-card">
-        <div class="header-main-info" style="margin-bottom:0;">
+    <!-- FIX 1 & FIX 9: Compact Header with Progress Bar -->
+    <div class="branch-header-card compact-header">
+        <div class="header-main-info">
             <div class="header-icon-box">📝</div>
             <div class="header-text-box">
                 <h1 id="current-list-title">ટેસ્ટ લિસ્ટ</h1>
                 <p>પ્રેક્ટિસ શરૂ કરવા માટે ટેસ્ટ પસંદ કરો</p>
             </div>
+        </div>
+
+        <!-- FIX 9: Overall Progress Bar -->
+        <div class="header-progress-section">
+            <div class="progress-bar-track">
+                <!-- Dynamically updated fill width -->
+                <div class="progress-bar-fill" id="quiz-list-progress-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-footer-text" id="quiz-list-progress-text">Progress: 0%</div>
         </div>
     </div>
 
