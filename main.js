@@ -162,6 +162,28 @@ function getCompletedTestCount(subjectKey, branchKey, typeName) {
     return completed;
 }
 
+// Normalizes whatever format mock_test.html saved (e.g. "01:12", "01:12 Min", or raw seconds)
+// into a consistent "MMm SSs" display, e.g. "01m 30s"
+function formatTestTime(raw) {
+    if (!raw) return '';
+    let cleaned = raw.toString().replace(/[^0-9:]/g, '');
+    let minutes = 0, seconds = 0;
+
+    if (cleaned.includes(':')) {
+        let parts = cleaned.split(':');
+        minutes = parseInt(parts[0]) || 0;
+        seconds = parseInt(parts[1]) || 0;
+    } else {
+        let totalSeconds = parseInt(cleaned) || 0;
+        minutes = Math.floor(totalSeconds / 60);
+        seconds = totalSeconds % 60;
+    }
+
+    const mm = String(minutes).padStart(2, '0');
+    const ss = String(seconds).padStart(2, '0');
+    return `${mm}m ${ss}s`;
+}
+
 function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
@@ -358,7 +380,7 @@ function buildQuizRows() {
                         : (isAttempted
                             ? `<div class="stats-pill-group">
                                 <span class="score-pill-clean">🏆 ${scoreValue}%</span>
-                                ${savedTime ? `<span class="time-pill-clean">⏱️ ${savedTime}</span>` : ''}
+                                ${savedTime ? `<span class="time-pill-clean">⏱️ ${formatTestTime(savedTime)}</span>` : ''}
                                </div>`
                             : '<span class="unattempted-tag">હજુ સુધી ટેસ્ટ આપ્યો નથી</span>'
                           )
@@ -487,4 +509,4 @@ window.onpageshow = function(event) {
         initDashboard();
     }
 };
-          
+  
