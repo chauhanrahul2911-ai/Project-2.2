@@ -309,7 +309,7 @@ function goToQuizList(type) {
     changeScreen('screen-quiz-list');
 }
 
-// --- SCREEN 4: QUIZ LIST CARDS BUILDER ---
+// --- SCREEN 4: QUIZ LIST CARDS BUILDER (UPDATED) ---
 function buildQuizRows() {
     const container = document.getElementById('dynamic-list-container');
     container.innerHTML = "";
@@ -331,33 +331,37 @@ function buildQuizRows() {
         const row = document.createElement('div');
         row.className = `quiz-row-card ${isLocked ? 'locked' : ''}`;
         
+        // FIX 8: Simplified Name ("Mock Test 1" instead of "Mock Test - 01")
+        const testDisplayName = `${currentType} ${i}`;
+
         row.innerHTML = `
-    <div class="quiz-card-left">
-        <div class="quiz-status-icon ${isLocked ? 'lock-bg' : (isAttempted ? 'done-bg' : 'start-bg')}">
-            ${isLocked ? '🔒' : (isAttempted ? '✓' : '⚡')}
-        </div>
-        <div class="quiz-card-info">
-            <div class="quiz-card-title">${currentType} - ${String(i).padStart(2, '0')}</div>
+            <div class="quiz-card-left">
+                <div class="quiz-status-icon ${isLocked ? 'lock-bg' : (isAttempted ? 'done-bg' : 'start-bg')}">
+                    ${isLocked ? '🔒' : (isAttempted ? '✓' : '⚡')}
+                </div>
+                <div class="quiz-card-info">
+                    <div class="quiz-card-title">${testDisplayName}</div>
+                    
+                    ${isLocked 
+                        ? '<span class="status-tag lock-tag">પ્રીમિયમ ટેસ્ટ</span>' 
+                        : (isAttempted 
+                            ? `<div class="stats-pill-group">
+                                <span class="score-pill-clean">🏆 ${scoreValue}%</span>
+                                ${savedTime ? `<span class="time-pill-clean">⏱️ ${savedTime} Min</span>` : ''}
+                               </div>` 
+                            /* FIX 2: Clearer unattempted text */
+                            : '<span class="unattempted-tag">હજુ સુધી ટેસ્ટ આપ્યો નથી</span>'
+                          )
+                    }
+                </div>
+            </div>
             
-            ${isLocked 
-                ? '<span class="status-tag lock-tag">પ્રીમિયમ ટેસ્ટ</span>' 
-                : (isAttempted 
-                    ? `<div class="quiz-stats-stack">
-                        <span class="stat-pill score-pill">સ્કોર: ${scoreValue}%</span>
-                        ${savedTime ? `<span class="stat-pill time-pill">⏱️ ${savedTime}</span>` : ''}
-                       </div>` 
-                    : '<span class="status-tag unattempted-tag">અત્યાર સુધી આપેલ નથી</span>'
-                  )
-            }
-        </div>
-    </div>
-    
-    <div class="quiz-card-right">
-        <button type="button" class="quiz-action-btn ${isLocked ? 'btn-lock' : 'btn-play'}">
-            ${isLocked ? 'Unlock →' : (isAttempted ? 'Retest →' : 'Start →')}
-        </button>
-    </div>
-`;
+            <div class="quiz-card-right">
+                <button type="button" class="quiz-action-btn ${isLocked ? 'btn-lock' : (isAttempted ? 'btn-retest' : 'btn-play')}">
+                    ${isLocked ? 'Unlock →' : (isAttempted ? 'Retest →' : 'Start →')}
+                </button>
+            </div>
+        `;
 
         row.onclick = function() {
             if (isLocked) {
@@ -379,7 +383,6 @@ function buildQuizRows() {
         container.appendChild(row);
     }
 }
-
 // --- AUTH & PAYMENT LOGIC ---
 function loginWithGoogle() {
     const dummyName = "રાહુલ કુમાર";
