@@ -689,3 +689,91 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 
 .btn-play { background: var(--gold-wash); color: var(--gold); }
 .btn-lock { background: #e2e8f0; color: #475569; }
+
+/* --- FIX 1: Reduced Height Header Card --- */
+.branch-header-card.compact-header {
+    padding: 1rem 1.2rem; /* Reduced top/bottom padding */
+}
+.compact-header .header-main-info {
+    margin-bottom: 0.8rem; /* Reduced vertical gap */
+}
+.compact-header .header-icon-box {
+    width: 42px;  /* Slightly smaller icon box */
+    height: 42px;
+    font-size: 1.3rem;
+}
+.compact-header .header-text-box h1 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+}
+
+/* --- FIX 3: High Contrast CTA Buttons --- */
+.quiz-action-btn.btn-play {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); /* Strong contrast gold */
+    color: #2a1c04;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(184, 135, 61, 0.3);
+}
+.quiz-action-btn.btn-retest {
+    background: #eef2ff;
+    color: var(--ink-2);
+    border: 1px solid #c7d2fe;
+}
+
+/* --- FIX 4 & 5: Clean Badges & Alignment --- */
+.score-pill-clean {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    font-weight: 700;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+.time-pill-clean {
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+.unattempted-tag {
+    font-size: 0.78rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* --- FIX 7: Softer Card Shadows --- */
+.quiz-row-card {
+    box-shadow: 0 2px 8px rgba(15, 35, 64, 0.04); /* Lightened shadow */
+    border: 1px solid rgba(226, 230, 238, 0.8);
+}
+
+/* --- FIX 10: Touch-Friendly Back Button --- */
+.back-btn-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    min-height: 42px; /* Touch target minimum */
+    cursor: pointer;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: background-color 0.15s ease;
+}
+.back-btn-chip:active {
+    background-color: var(--paper);
+}
