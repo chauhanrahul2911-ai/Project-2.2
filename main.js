@@ -1,4 +1,4 @@
-// MASTER DATA STRUCTURE WITH TWO-WAY ICONS (PNG +  EMOJI FALLBACK)
+// MASTER DATA STRUCTURE WITH TWO-WAY ICONS (PNG + EMOJI FALLBACK)
 const subjectData = {
   samanya_gyan: {
     gujName: "સામાન્ય જ્ઞાન",
@@ -71,8 +71,8 @@ const subjectData = {
 
 const syllabusSubjects = Object.keys(subjectData);
 
-let currentSubject = ""; 
-let currentBranch = "";  
+let currentSubject = "";
+let currentBranch = "";
 let currentType = "";
 let isPremiumUser = (localStorage.getItem('gsrtc_is_premium') === 'true');
 let isRestoring = false;
@@ -117,8 +117,8 @@ function getBranchProgress(subjectKey, branchKey, typeName) {
     let totalSum = 0;
     const totalTests = subjectData[subjectKey].branches[branchKey].totalTests;
     const branchGujName = subjectData[subjectKey].branches[branchKey].gujName;
-    
-    for(let i = 1; i <= totalTests; i++) {
+
+    for (let i = 1; i <= totalTests; i++) {
         let storageKey = `${subjectKey}_${branchGujName}_${typeName}_${i}_score`;
         totalSum += parseInt(localStorage.getItem(storageKey)) || 0;
     }
@@ -128,15 +128,15 @@ function getBranchProgress(subjectKey, branchKey, typeName) {
 function getSubjectProgress(subjectKey) {
     let totalPercentageSum = 0;
     const branches = Object.keys(subjectData[subjectKey].branches);
-    
-    if(branches.length === 0) return 0;
+
+    if (branches.length === 0) return 0;
 
     branches.forEach(branchKey => {
         let qProg = getBranchProgress(subjectKey, branchKey, 'Quiz');
         let mProg = getBranchProgress(subjectKey, branchKey, 'Mock Test');
         totalPercentageSum += ((qProg + mProg) / 2);
     });
-    
+
     return Math.round(totalPercentageSum / branches.length) || 0;
 }
 
@@ -144,6 +144,22 @@ function getOverallAppProgress() {
     let totalSum = 0;
     syllabusSubjects.forEach(subKey => { totalSum += getSubjectProgress(subKey); });
     return Math.round(totalSum / syllabusSubjects.length) || 0;
+}
+
+// Counts how many tests in this branch+type have a saved score of exactly 100%
+function getCompletedTestCount(subjectKey, branchKey, typeName) {
+    const totalTests = subjectData[subjectKey].branches[branchKey].totalTests;
+    const branchGujName = subjectData[subjectKey].branches[branchKey].gujName;
+    let completed = 0;
+
+    for (let i = 1; i <= totalTests; i++) {
+        let storageKey = `${subjectKey}_${branchGujName}_${typeName}_${i}_score`;
+        let saved = localStorage.getItem(storageKey);
+        if (saved !== null && parseInt(saved) === 100) {
+            completed++;
+        }
+    }
+    return completed;
 }
 
 function escapeHtml(str) {
@@ -181,7 +197,7 @@ function updateProfileUI() {
     }
 }
 
-// --- SCREEN 1: SUBJECTS DISPLAY (CLEAN TRANSPARENT FALLBACK) ---
+// --- SCREEN 1: SUBJECTS DISPLAY ---
 function buildSubjectCards() {
     const container = document.getElementById('subjects-container');
     container.innerHTML = "";
@@ -195,17 +211,17 @@ function buildSubjectCards() {
 
         const card = document.createElement('div');
         card.className = "card";
-        card.onclick = () => goToBranchSelect(subKey); 
-        
+        card.onclick = () => goToBranchSelect(subKey);
+
         card.innerHTML = `
             <div class="card-left">
                 <div class="card-icon-box">
                     <span class="fallback-emoji" id="emoji-${subKey}">${fallbackEmoji}</span>
                     ${iconPath ? `
-                        <img src="${iconPath}" 
-                             alt="${gujSubjectName}" 
-                             class="card-img-icon" 
-                             onload="document.getElementById('emoji-${subKey}').style.display='none'" 
+                        <img src="${iconPath}"
+                             alt="${gujSubjectName}"
+                             class="card-img-icon"
+                             onload="document.getElementById('emoji-${subKey}').style.display='none'"
                              onerror="this.style.display='none'; document.getElementById('emoji-${subKey}').style.display='inline'">
                     ` : ''}
                 </div>
@@ -217,16 +233,16 @@ function buildSubjectCards() {
     });
 }
 
-// --- 🌿 BRANCH/CHAPTERS GRID GENERATOR (Screen 2) ---
+// --- SCREEN 2: BRANCH/CHAPTERS GRID GENERATOR ---
 function goToBranchSelect(subjectKey) {
     currentSubject = subjectKey;
-    
+
     let cleanSubjectName = subjectData[subjectKey].gujName;
     const titleElem = document.getElementById('current-subject-title-branch');
     if (titleElem) titleElem.innerText = cleanSubjectName;
-    
+
     const branches = Object.keys(subjectData[subjectKey].branches);
-    const totalChapters = branches.length; 
+    const totalChapters = branches.length;
     let completedChapters = 0;
 
     const container = document.getElementById('branches-container');
@@ -237,7 +253,6 @@ function goToBranchSelect(subjectKey) {
         let mProg = getBranchProgress(subjectKey, branchKey, 'Mock Test');
         let branchProgress = Math.round((qProg + mProg) / 2) || 0;
 
-        // Count completed branches (100% progress)
         if (branchProgress >= 100) {
             completedChapters++;
         }
@@ -246,7 +261,7 @@ function goToBranchSelect(subjectKey) {
 
         const card = document.createElement('div');
         card.className = "card";
-        card.onclick = () => goToTypeSelect(branchKey); 
+        card.onclick = () => goToTypeSelect(branchKey);
         card.innerHTML = `
             <div style="flex:1;">
                 <div class="card-title">${index + 1}. ${cleanBranchName}</div>
@@ -258,10 +273,8 @@ function goToBranchSelect(subjectKey) {
         container.appendChild(card);
     });
 
-    // Dynamic Overall Progress Calculation
     let subjectOverallProgress = getSubjectProgress(subjectKey);
 
-    // Banner Stats Update
     const totalElem = document.getElementById('stat-total-chapters');
     const compElem = document.getElementById('stat-completed-chapters');
     const progElem = document.getElementById('stat-progress-perc');
@@ -276,30 +289,29 @@ function goToBranchSelect(subjectKey) {
     changeScreen('screen-branches');
 }
 
-
 // --- SCREEN 3: TYPE SELECT ---
 function goToTypeSelect(branchKey) {
     currentBranch = branchKey;
-    
+
     let cleanBranchName = subjectData[currentSubject].branches[branchKey].gujName;
     document.getElementById('current-subject-name').innerText = cleanBranchName;
-    
+
     let quizProg = getBranchProgress(currentSubject, branchKey, 'Quiz');
     let mockProg = getBranchProgress(currentSubject, branchKey, 'Mock Test');
-    
+
     document.getElementById('quiz-type-perc').innerText = `Progress: ${quizProg}%`;
     document.getElementById('mock-type-perc').innerText = `Progress: ${mockProg}%`;
-    
+
     if (!isRestoring) {
       sessionStorage.setItem('last_active_branch', currentBranch);
     }
     changeScreen('screen-type-select');
 }
 
-// --- SCREEN 4: QUIZ LIST ROWS ---
+// --- SCREEN 4: QUIZ LIST ---
 function goToQuizList(type) {
     currentType = type;
-    
+
     let cleanBranchName = subjectData[currentSubject].branches[currentBranch].gujName;
     document.getElementById('current-list-title').innerText = `${cleanBranchName} - ${type}`;
     if (!isRestoring) {
@@ -309,7 +321,7 @@ function goToQuizList(type) {
     changeScreen('screen-quiz-list');
 }
 
-// --- SCREEN 4: QUIZ LIST CARDS BUILDER (UPDATED) ---
+// --- SCREEN 4: QUIZ LIST CARDS + HEADER STATS ---
 function buildQuizRows() {
     const container = document.getElementById('dynamic-list-container');
     container.innerHTML = "";
@@ -318,20 +330,19 @@ function buildQuizRows() {
     const branchGujName = subjectData[currentSubject].branches[currentBranch].gujName;
 
     for (let i = 1; i <= totalTests; i++) {
-        let isLocked = (i > 3 && !isPremiumUser); 
+        let isLocked = (i > 3 && !isPremiumUser);
         let scoreKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_score`;
         let timeKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_time`;
-        
+
         let savedScore = localStorage.getItem(scoreKey);
         let savedTime = localStorage.getItem(timeKey);
-        
+
         let isAttempted = savedScore !== null;
         let scoreValue = isAttempted ? parseInt(savedScore) : 0;
 
         const row = document.createElement('div');
         row.className = `quiz-row-card ${isLocked ? 'locked' : ''}`;
-        
-        // FIX 8: Simplified Name ("Mock Test 1" instead of "Mock Test - 01")
+
         const testDisplayName = `${currentType} ${i}`;
 
         row.innerHTML = `
@@ -341,21 +352,20 @@ function buildQuizRows() {
                 </div>
                 <div class="quiz-card-info">
                     <div class="quiz-card-title">${testDisplayName}</div>
-                    
-                    ${isLocked 
-                        ? '<span class="status-tag lock-tag">પ્રીમિયમ ટેસ્ટ</span>' 
-                        : (isAttempted 
+
+                    ${isLocked
+                        ? '<span class="status-tag lock-tag">પ્રીમિયમ ટેસ્ટ</span>'
+                        : (isAttempted
                             ? `<div class="stats-pill-group">
                                 <span class="score-pill-clean">🏆 ${scoreValue}%</span>
-                                ${savedTime ? `<span class="time-pill-clean">⏱️ ${savedTime} Min</span>` : ''}
-                               </div>` 
-                            /* FIX 2: Clearer unattempted text */
+                                ${savedTime ? `<span class="time-pill-clean">⏱️ ${savedTime}</span>` : ''}
+                               </div>`
                             : '<span class="unattempted-tag">હજુ સુધી ટેસ્ટ આપ્યો નથી</span>'
                           )
                     }
                 </div>
             </div>
-            
+
             <div class="quiz-card-right">
                 <button type="button" class="quiz-action-btn ${isLocked ? 'btn-lock' : (isAttempted ? 'btn-retest' : 'btn-play')}">
                     ${isLocked ? 'Unlock →' : (isAttempted ? 'Retest →' : 'Start →')}
@@ -368,21 +378,35 @@ function buildQuizRows() {
                 if (!localStorage.getItem('gsrtc_logged_user')) {
                     alert("🔒 આગળના પ્રીમિયમ ટેસ્ટ માટે કૃપા કરીને પહેલા Google વડે લોગિન કરો.");
                     loginWithGoogle();
-                } else { 
-                    openPaywall(); 
+                } else {
+                    openPaywall();
                 }
             } else {
                 localStorage.setItem('last_active_subject', currentSubject);
                 localStorage.setItem('last_active_branch', currentBranch);
                 localStorage.setItem('last_active_type', currentType);
-                localStorage.setItem('last_active_branch_guj', branchGujName); 
-                localStorage.setItem('last_active_quiz_no', i);         
-                window.location.href = `mock_test.html`;            
+                localStorage.setItem('last_active_branch_guj', branchGujName);
+                localStorage.setItem('last_active_quiz_no', i);
+                window.location.href = `mock_test.html`;
             }
         };
         container.appendChild(row);
     }
+
+    // Header stats: total tests, tests completed at 100%, and overall progress
+    // (same average-score math used for the Quiz/Mock Test badges on Screen 3)
+    const completedTests = getCompletedTestCount(currentSubject, currentBranch, currentType);
+    const listProgress = getBranchProgress(currentSubject, currentBranch, currentType);
+
+    const totalElem = document.getElementById('stat-total-tests');
+    const compElem = document.getElementById('stat-completed-tests');
+    const progElem = document.getElementById('stat-list-progress-perc');
+
+    if (totalElem) totalElem.innerText = totalTests;
+    if (compElem) compElem.innerText = completedTests;
+    if (progElem) progElem.innerText = `${listProgress}%`;
 }
+
 // --- AUTH & PAYMENT LOGIC ---
 function loginWithGoogle() {
     const dummyName = "રાહુલ કુમાર";
@@ -401,7 +425,7 @@ function simulatePayment() {
     closePaywall();
     updateProfileUI();
     buildSubjectCards();
-    if(currentType) buildQuizRows();
+    if (currentType) buildQuizRows();
     alert("પેમેન્ટ સફળ રહ્યું! બધા લોક ખુલી ગયા છે.");
 }
 
@@ -434,7 +458,7 @@ function initDashboard() {
 window.onpopstate = function () {
     const lastScreen = history.state?.activeScreen;
     if (!lastScreen) return;
-  
+
     document.querySelectorAll(".screen").forEach(screen => {
         screen.classList.remove("active");
     });
@@ -463,4 +487,4 @@ window.onpageshow = function(event) {
         initDashboard();
     }
 };
-  
+          
