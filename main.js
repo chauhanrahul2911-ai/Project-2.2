@@ -288,7 +288,7 @@ function goToBranchSelect(subjectKey) {
             <div style="flex:1;">
                 <div class="card-title">${index + 1}. ${cleanBranchName}</div>
                 <div class="branch-bar-track"><div class="branch-bar-fill" style="width:${branchProgress}%;"></div></div>
-                <span class="sub-perc">કુલ પ્રગતિ: ${branchProgress}%</span>
+                <span class="sub-perc-badge">Progress: ${branchProgress}%</span>
             </div>
             <span class="card-arrow">➔</span>
         `;
@@ -379,8 +379,8 @@ function buildQuizRows() {
                         ? '<span class="status-tag lock-tag">પ્રીમિયમ ટેસ્ટ</span>'
                         : (isAttempted
                             ? `<div class="stats-pill-group">
-                                <span class="score-pill-clean">${scoreValue}%</span>
-                                ${savedTime ? `<span class="time-pill-clean">${formatTestTime(savedTime)}</span>` : ''}
+                                <span class="score-pill-clean">🏆 ${scoreValue}%</span>
+                                ${savedTime ? `<span class="time-pill-clean">⏱️ ${formatTestTime(savedTime)}</span>` : ''}
                                </div>`
                             : '<span class="unattempted-tag">હજુ સુધી ટેસ્ટ આપ્યો નથી</span>'
                           )
@@ -509,4 +509,3 @@ window.onpageshow = function(event) {
         initDashboard();
     }
 };
-  
