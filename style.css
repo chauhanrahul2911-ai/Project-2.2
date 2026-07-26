@@ -34,21 +34,11 @@ body { font-family: var(--font-body); background-color: var(--paper); color: var
 }
 .menu-trigger { font-size: 1.4rem; cursor: pointer; background: none; border: none; color: var(--gold-light); line-height: 1; }
 
-header {
-    background: linear-gradient(160deg, var(--ink) 0%, var(--ink-2) 100%);
-    color: white; text-align: center; padding: 2.8rem 1.2rem 2.2rem;
-    border-bottom: 3px solid var(--gold);
-    border-radius: 0 0 22px 22px; margin-bottom: 1.8rem;
-    position: relative;
-}
-header h1 { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; letter-spacing: 0.2px; }
-header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
-
 /* SCREENS SYSTEM */
 .screen { display: none; padding: 1rem; max-width: 800px; margin: 0 auto; }
 .active { display: block; }
 
-/* BRANCH BANNER HEADER CARD */
+/* BRANCH BANNER HEADER CARD (also used on Screen 4's compact header) */
 .branch-header-card {
     background: linear-gradient(135deg, #0f2340 0%, #1b3a63 100%);
     border-radius: 18px;
@@ -91,48 +81,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     margin-top: 2px;
 }
 
-/* CLEAN BRANCH BANNER HEADER */
-.branch-header-card {
-    background: linear-gradient(135deg, #0f2340 0%, #1b3a63 100%);
-    border-radius: 18px;
-    padding: 1.2rem;
-    color: #ffffff;
-    box-shadow: 0 8px 20px rgba(15, 35, 64, 0.2);
-    margin-bottom: 1.5rem;
-}
-
-.header-main-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1.2rem;
-}
-
-.header-icon-box {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    flex-shrink: 0;
-}
-
-.header-text-box h1 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-}
-
-.header-text-box p {
-    font-size: 0.85rem;
-    color: #a0aec0;
-    margin-top: 2px;
-}
-
+/* HEADER STATS ROW — shared by Screen 2 (chapters) and Screen 4 (test list) */
 .header-stats-row {
     display: flex;
     align-items: center;
@@ -190,35 +139,6 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     background: rgba(255, 255, 255, 0.15);
 }
 
-
-/* BANNER PROGRESS BAR */
-.header-progress-section {
-    width: 100%;
-}
-
-.progress-bar-track {
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #ff7a00 0%, #ff9e00 100%);
-    border-radius: 10px;
-    transition: width 0.4s ease;
-}
-
-.progress-footer-text {
-    text-align: center;
-    font-size: 0.8rem;
-    color: #e2e8f0;
-    margin-top: 6px;
-    font-weight: 500;
-}
-
 /* SUBJECT / BRANCH CARDS */
 .grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
 @media(min-width: 600px) { .grid { grid-template-columns: 1fr 1fr; } }
@@ -266,12 +186,8 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     width: 50px;
     height: 50px;
     object-fit: contain;
-    position: absolute; /* Emoji ke upar image perfectly fit karne ke liye */
+    position: absolute;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-}
-.card-num {
-    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--gold);
-    background: var(--gold-wash); border-radius: 8px; padding: 4px 8px; flex-shrink: 0;
 }
 .card-title {
     font-weight: 700;
@@ -308,19 +224,6 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .branch-bar-track { width: 100%; height: 6px; border-radius: 4px; background: #e5e8ee; margin-top: 6px; overflow: hidden; }
 .branch-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%); border-radius: 4px; }
 .sub-perc { font-size: 0.8rem; color: var(--ink-soft); font-weight: 500; display: inline-block; margin-top: 6px; }
-
-/* LIST ITEMS */
-.list-item {
-    background: var(--card); padding: 1rem 1.2rem; margin-bottom: 0.7rem;
-    border-radius: 12px; display: flex; justify-content: space-between; align-items: center;
-    border: 1px solid var(--line); cursor: pointer; font-weight: 500; transition: 0.15s;
-}
-.list-item:hover { border-color: var(--gold); }
-.list-item.locked { color: #94a0b3; background: #f2f3f6; }
-.list-item .score-chip {
-    font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;
-    color: var(--gold); background: var(--gold-wash); padding: 3px 10px; border-radius: 20px;
-}
 
 /* BUTTONS */
 .btn {
@@ -381,7 +284,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px; /* Text aur Image ke beech safe distance */
+    gap: 15px;
     box-shadow: 0 10px 25px rgba(7, 30, 61, 0.25);
     margin-bottom: 1.8rem;
     position: relative;
@@ -390,7 +293,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 }
 
 .subject-header-left {
-    flex: 1; /* Text apni jagah khud adjust karega */
+    flex: 1;
     z-index: 2;
 }
 
@@ -420,7 +323,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 
 /* RIGHT IMAGE CONTAINER */
 .subject-header-right {
-    flex-shrink: 0; /* Image text ko push nahi karegi */
+    flex-shrink: 0;
     z-index: 2;
     display: flex;
     align-items: center;
@@ -428,7 +331,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 }
 
 .subject-header-img {
-    width: 130px; /* Perfect transparent icon size */
+    width: 130px;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 8px 18px rgba(0,0,0,0.4));
@@ -449,7 +352,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
         width: 100px;
     }
 }
-    
+
 /* --- SCREEN 3: TYPE SELECT CARDS --- */
 .type-cards-grid {
     display: flex;
@@ -553,13 +456,12 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     margin-top: 1rem;
 }
 
-/* --- QUIZ CARD LAYOUT FIX --- */
 .quiz-row-card {
     background: var(--card);
     border-radius: 14px;
     padding: 0.9rem 1rem;
-    border: 1px solid var(--line);
-    box-shadow: 0 3px 10px rgba(15, 35, 64, 0.04);
+    border: 1px solid rgba(226, 230, 238, 0.8);
+    box-shadow: 0 2px 8px rgba(15, 35, 64, 0.04);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -602,7 +504,6 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 .done-bg { background: #f0fdf4; color: #16a34a; }
 .lock-bg { background: #f1f5f9; color: #64748b; }
 
-/* --- CLEAN QUIZ CARD ALIGNMENT FIX --- */
 .quiz-card-info {
     display: flex;
     flex-direction: column;
@@ -617,40 +518,11 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     color: var(--ink);
 }
 
-/* TIME & SCORE STACK (Time Niche Aa Gaya) */
-.quiz-stats-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-}
-
 .stats-pill-group {
     display: flex;
     align-items: center;
     gap: 6px;
-    flex-wrap: nowrap; /* Text ko kabi bhi doosri line me jaane nahi dega */
-}
-
-.stat-pill {
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 6px;
-    white-space: nowrap;
-}
-
-.score-pill {
-    background: #ecfdf5;
-    color: #047857;
-    border: 1px solid #a7f3d0;
-}
-
-.time-pill {
-    background: #f1f5f9;
-    color: #475569;
-    border: 1px solid #e2e8f0;
-    font-family: var(--font-mono);
+    flex-wrap: nowrap;
 }
 
 .status-tag {
@@ -658,12 +530,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     color: var(--ink-soft);
 }
 
-.quiz-card-subtext {
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-}
-
-/* --- BUTTON FIX (SAME FIXED SIZE & NO OVERFLOW) --- */
+/* --- QUIZ CARD ACTION BUTTON (FIXED SIZE, NO OVERFLOW) --- */
 .quiz-card-right {
     display: flex;
     align-items: center;
@@ -672,8 +539,8 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 }
 
 .quiz-action-btn {
-    width: 82px;            /* Fixed Same Width for Retest, Start, Unlock */
-    height: 34px;           /* Fixed Same Height */
+    width: 82px;
+    height: 34px;
     font-size: 0.78rem;
     font-weight: 700;
     border: none;
@@ -687,40 +554,20 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.btn-play { background: var(--gold-wash); color: var(--gold); }
-.btn-lock { background: #e2e8f0; color: #475569; }
-
-/* --- FIX 1: Reduced Height Header Card --- */
-.branch-header-card.compact-header {
-    padding: 1rem 1.2rem; /* Reduced top/bottom padding */
-}
-.compact-header .header-main-info {
-    margin-bottom: 0.8rem; /* Reduced vertical gap */
-}
-.compact-header .header-icon-box {
-    width: 42px;  /* Slightly smaller icon box */
-    height: 42px;
-    font-size: 1.3rem;
-}
-.compact-header .header-text-box h1 {
-    font-size: 1.25rem;
-    line-height: 1.2;
-}
-
-/* --- FIX 3: High Contrast CTA Buttons --- */
-.quiz-action-btn.btn-play {
-    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); /* Strong contrast gold */
+.btn-play {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
     color: #2a1c04;
     font-weight: 700;
     box-shadow: 0 2px 6px rgba(184, 135, 61, 0.3);
 }
-.quiz-action-btn.btn-retest {
+.btn-retest {
     background: #eef2ff;
     color: var(--ink-2);
     border: 1px solid #c7d2fe;
 }
+.btn-lock { background: #e2e8f0; color: #475569; }
 
-/* --- FIX 4 & 5: Clean Badges & Alignment --- */
+/* --- CLEAN SCORE / TIME BADGES --- */
 .score-pill-clean {
     background: #ecfdf5;
     color: #047857;
@@ -750,13 +597,24 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     font-weight: 500;
 }
 
-/* --- FIX 7: Softer Card Shadows --- */
-.quiz-row-card {
-    box-shadow: 0 2px 8px rgba(15, 35, 64, 0.04); /* Lightened shadow */
-    border: 1px solid rgba(226, 230, 238, 0.8);
+/* --- COMPACT HEADER VARIANT (Screen 4) --- */
+.branch-header-card.compact-header {
+    padding: 1rem 1.2rem;
+}
+.compact-header .header-main-info {
+    margin-bottom: 0.8rem;
+}
+.compact-header .header-icon-box {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+}
+.compact-header .header-text-box h1 {
+    font-size: 1.25rem;
+    line-height: 1.2;
 }
 
-/* --- FIX 10: Touch-Friendly Back Button --- */
+/* --- TOUCH-FRIENDLY PILL BACK BUTTON (Screen 4) --- */
 .back-btn-chip {
     display: inline-flex;
     align-items: center;
@@ -768,7 +626,7 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
     font-size: 0.88rem;
     padding: 8px 16px;
     border-radius: 20px;
-    min-height: 42px; /* Touch target minimum */
+    min-height: 42px;
     cursor: pointer;
     margin-bottom: 1rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
@@ -776,4 +634,5 @@ header p { color: #c7d2e3; margin-top: 8px; font-size: 0.95rem; }
 }
 .back-btn-chip:active {
     background-color: var(--paper);
-}
+    }
+        
