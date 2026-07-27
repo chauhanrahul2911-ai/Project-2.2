@@ -67,7 +67,7 @@ function shuffleArray(arr) {
 // SETUP CORE INITIAL SECTIONS
 async function initMockEngine() {
     try {
-        const res = await fetch(`data/${subject}/${branchFolder}/${type}_${quizNo}.json?v=${new Date().getTime()}`);
+        const res = await fetch(`data/${subject}/${branchFolder}/Test_${quizNo}.json?v=${new Date().getTime()}`);
         if(!res.ok) throw new Error("Dataset response bad");
         originalData = await res.json();
         originalData = originalData.slice(0, 25); 
