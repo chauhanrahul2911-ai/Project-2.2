@@ -349,7 +349,7 @@ function closeZoom() {
 // Initial Fetch Kickstart Engine
 async function loadQuizDataset() {
     try {
-        const response = await fetch(`data/${subject}/${branchFolder}/${type}_${quizNo}.json?v=${new Date().getTime()}`);
+        const response = await fetch(`data/${subject}/${branchFolder}/Test_${quizNo}.json?v=${new Date().getTime()}`);
         if(!response.ok) throw new Error("File not found");
         quizData = await response.json();
         
