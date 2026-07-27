@@ -265,7 +265,7 @@ function handleNext() {
 
 function autoSaveScore() {
     var finalPercent = Math.round((score / quizData.length) * 100) || 0;
-    let scoreKey = `${subject}_${branch}_${type}_${quizNo}_score`;
+    let scoreKey = `${subject}_${branchFolder}_${type}_${quizNo}_score`;
     localStorage.setItem(scoreKey, finalPercent);
 }
 
