@@ -408,7 +408,12 @@ function buildQuizRows() {
                 localStorage.setItem('last_active_type', currentType);
                 localStorage.setItem('last_active_branch_guj', branchGujName);
                 localStorage.setItem('last_active_quiz_no', i);
+                // 🎯 TYPE CHECKER LOGIC:
+              if (currentType === 'Quiz') {
+                window.location.href = `quiz_player.html`;
+              } else {
                 window.location.href = `mock_test.html`;
+              }
             }
         };
         container.appendChild(row);
