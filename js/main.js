@@ -119,7 +119,7 @@ function getBranchProgress(subjectKey, branchKey, typeName) {
     const branchGujName = subjectData[subjectKey].branches[branchKey].gujName;
 
     for (let i = 1; i <= totalTests; i++) {
-        let storageKey = `${subjectKey}_${branchGujName}_${typeName}_${i}_score`;
+        let storageKey = `${subjectKey}_${branchKey}_${typeName}_${i}_score`;
         totalSum += parseInt(localStorage.getItem(storageKey)) || 0;
     }
     return Math.round(totalSum / totalTests) || 0;
@@ -153,7 +153,7 @@ function getCompletedTestCount(subjectKey, branchKey, typeName) {
     let completed = 0;
 
     for (let i = 1; i <= totalTests; i++) {
-        let storageKey = `${subjectKey}_${branchGujName}_${typeName}_${i}_score`;
+        let storageKey = `${subjectKey}_${branchKey}_${typeName}_${i}_score`;
         let saved = localStorage.getItem(storageKey);
         if (saved !== null && parseInt(saved) === 100) {
             completed++;
@@ -353,9 +353,8 @@ function buildQuizRows() {
 
     for (let i = 1; i <= totalTests; i++) {
         let isLocked = (i > 3 && !isPremiumUser);
-        let scoreKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_score`;
-        let timeKey = `${currentSubject}_${branchGujName}_${currentType}_${i}_time`;
-
+        let scoreKey = `${currentSubject}_${currentBranch}_${currentType}_${i}_score`;
+        let timeKey = `${currentSubject}_${currentBranch}_${currentType}_${i}_time`;
         let savedScore = localStorage.getItem(scoreKey);
         let savedTime = localStorage.getItem(timeKey);
 
