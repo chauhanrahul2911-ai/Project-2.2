@@ -371,8 +371,8 @@ function processResults(forced = false) {
     document.getElementById('result-panel').style.display = 'block';
     
     // 💾 SAVE SCORE & TIME TAKEN IN LOCALSTORAGE
-    let masterSaveKey = `${subject}_${localStorage.getItem('last_active_branch_guj')}_${type}_${quizNo}_score`;
-    let timeSaveKey = `${subject}_${localStorage.getItem('last_active_branch_guj')}_${type}_${quizNo}_time`;
+    let masterSaveKey = `${subject}_${branchFolder}_${type}_${quizNo}_score`;
+    let timeSaveKey = `${subject}_${branchFolder}_${type}_${quizNo}_time`;
 
     localStorage.setItem(masterSaveKey, Math.round(displayRingPct));
     localStorage.setItem(timeSaveKey, timeTakenString);
